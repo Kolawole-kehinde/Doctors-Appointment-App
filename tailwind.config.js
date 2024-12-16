@@ -12,10 +12,11 @@ export default {
         },
         secondary: {
           DEFAULT: "#EAEFFF",
+          100: "#ADADAD",
         },
       },
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        outfit: ["Outfit", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
     },

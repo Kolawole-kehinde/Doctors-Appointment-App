@@ -13,6 +13,7 @@ export default {
         secondary: {
           DEFAULT: "#EAEFFF",
           100: "#ADADAD",
+          200: "#595959",
         },
       },
       fontFamily: {

@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../assets/prescripto-logo.svg';
 import { NavLink } from 'react-router';
 
 const Navbar = () => {
@@ -8,7 +7,7 @@ const Navbar = () => {
       <div className="wrapper">
         <nav className="flex items-center justify-between">
           <div>
-            <img src={logo} alt="Logo" />
+            <img src="/images/prescripto-logo.svg" alt="Logo" />
           </div>
 
           <div>
@@ -27,7 +26,7 @@ const Navbar = () => {
                 <NavLink
                   to="/doctors"
                   className={({ isActive }) =>
-                    isActive ? 'text-orange-500' : 'text-[#49557e]'
+                   isActive ? 'text-primary' : 'text-gray-500'
                   }
                 >
                   ALL DOCTORS
@@ -37,7 +36,7 @@ const Navbar = () => {
                 <NavLink
                   to="/about"
                   className={({ isActive }) =>
-                    isActive ? 'text-orange-500' : 'text-[#49557e]'
+                   isActive ? 'text-primary' : 'text-gray-500'
                   }
                 >
                   ABOUT
@@ -47,7 +46,7 @@ const Navbar = () => {
                 <NavLink
                   to="/contact"
                   className={({ isActive }) =>
-                    isActive ? 'text-orange-500' : 'text-[#49557e]'
+                   isActive ? 'text-primary' : 'text-gray-500'
                   }
                 >
                   CONTACT

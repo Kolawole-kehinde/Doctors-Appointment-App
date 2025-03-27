@@ -1,6 +1,4 @@
 import React from 'react';
-import users from '../assets/group_profiles-BCL6AVF5.png';
-import heroImg from '../assets/doc-header-img.svg';
 
 const ShowCase = () => {
   return (
@@ -12,7 +10,7 @@ const ShowCase = () => {
           Book Appointment <br />With Trusted Doctors
         </h1>
         <div className="flex items-center gap-4">
-          <img src={users} alt="group_profiles" className="w-[112px] h-auto" />
+          <img src="/images/group_profiles.png" alt="group_profiles" className="w-[112px] h-auto" />
           <p className="text-base text-white">
             Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
           </p>
@@ -24,7 +22,7 @@ const ShowCase = () => {
   
       {/* Right Section - Hero Image */}
       <div className="w-full max-w-[882px]">
-        <img src={heroImg} alt="Hero" className="w-full object-cover mt-20" />
+        <img src="/images/doc-header-img.svg" alt="ShowCase-image" className="w-full object-cover mt-20" />
       </div>
     </div>
   </section>

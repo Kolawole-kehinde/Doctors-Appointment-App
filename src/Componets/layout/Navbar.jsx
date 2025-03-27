@@ -38,7 +38,7 @@ const Navbar = () => {
 
           <Menu menuStyle="flex flex-col gap-2 p-2 text-lg" toggleMenu={toggleMenu} />
           <div className="font-outfit text-lg leading-[43px] text-white ">
-            <button className="w-full px-8 py-1 bg-primary  rounded">
+            <button className="w-full px-8 py-1 bg-primary  rounded cursor-pointer outline-none hover:scale-105 transition-all">
               Create account
             </button>
           </div>

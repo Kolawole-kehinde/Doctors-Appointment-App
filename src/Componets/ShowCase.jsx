@@ -24,7 +24,7 @@ const ShowCase = () => {
           </div>
           <a
             href="#Speciality"
-            className=" flex items-center gap-2 bg-white px-8 py-3 rounded-full   text-secondary-200 text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
+            className=" flex items-center gap-2 bg-white px-8 py-3 rounded text-secondary-200 text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
           >
             Book appointment <span className="text-lg">→</span>
           </a>

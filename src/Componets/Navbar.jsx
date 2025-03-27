@@ -6,9 +6,9 @@ const Navbar = () => {
     <header className="py-4">
       <div className="wrapper">
         <nav className="flex items-center justify-between">
-          <div>
+          <NavLink to="/">
             <img src="/images/prescripto-logo.svg" alt="Logo" />
-          </div>
+          </NavLink>
 
           <div>
             <ul className="font-poppins flex items-center gap-[1.25rem] text-base leading-[24px] font-medium text-center">

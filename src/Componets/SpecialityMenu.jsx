@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 const SpecialityMenu = () => {
   return (
-    <section id="Speciality" className="wrapper flex flex-col items-center justify-center py-10 text-center">
+    <section id="Speciality" className="wrapper flex flex-col items-center justify-center py-10 text-center px-4 lg:px-0">
       
         <h1 className="text-[2.5rem] font-medium font-outfit text-primary-100 text-center pb-2">
           Find by Speciality{" "}

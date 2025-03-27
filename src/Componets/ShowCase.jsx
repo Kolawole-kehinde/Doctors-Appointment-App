@@ -1,31 +1,42 @@
-import React from 'react';
+import React from "react";
 
 const ShowCase = () => {
   return (
-    <section id="Hero-section" className="py-10 font-outfit">
-      <div className="wrapper bg-primary rounded-lg mx-auto flex items-center justify-between px-8">
+    <section className=" font-outfit">
+      <div className="wrapper bg-primary flex flex-col-reverse  md:flex-row flex-wrap rounded-lg px-6 md:px-10 lg:px-20">
         {/* Left Section */}
-        <div className="w-full max-w-[717px] flex flex-col gap-4 ml-20">
-          <h1 className="text-5xl leading-tight font-bold text-white">
-            Book Appointment <br />With Trusted Doctors
+        <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 m-auto py-20 md:mb-[30px]">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl leading-tight lg:leading-[70px] font-semibold text-white">
+            Book Appointment <br /> 
+            With Trusted Doctors
           </h1>
-          <div className="flex items-center gap-4">
-            <img src="/images/group_profiles.png" alt="group_profiles" className="w-[112px] h-auto" />
-            <p className="text-base text-white">
-              Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+          <div className="flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light">
+            <img
+              src="/images/group_profiles.png"
+              alt="group_profiles"
+              className="w-28"
+            />
+            <p>
+              Simply browse through our extensive list of trusted doctors,{" "}
+              <br className="hidden sm:block" /> schedule your appointment
+              hassle-free.
             </p>
           </div>
           <a
             href="#Speciality"
-            className="mt-4 bg-white w-[240px] h-[63px] rounded-[2.938rem] text-secondary-200 text-lg text-center p-4"
+            className=" flex items-center gap-2 bg-white px-8 py-3 rounded-full   text-secondary-200 text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
           >
-            Book appointment <span>→</span>
+            Book appointment <span className="text-lg">→</span>
           </a>
         </div>
 
         {/* Right Section - Hero Image */}
-        <div className="w-full max-w-[882px]">
-          <img src="/images/doc-header-img.svg" alt="ShowCase-image" className="w-full object-cover mt-20" />
+        <div className="md:w-1/2 relative">
+          <img
+            src="/images/doc-header-img.svg"
+            alt="ShowCase-image"
+            className="w-full md:absolute bottom-0 h-auto rounded-lg "
+          />
         </div>
       </div>
     </section>

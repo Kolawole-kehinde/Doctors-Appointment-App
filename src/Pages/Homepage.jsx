@@ -1,11 +1,12 @@
 import React from 'react'
+import ShowCase from '../Componets/ShowCase'
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
-      
+      <ShowCase/>
     </div>
   )
 }
 
-export default Home
+export default HomePage

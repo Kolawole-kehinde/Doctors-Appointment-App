@@ -2,7 +2,7 @@ import React from 'react';
 import users from '../assets/group_profiles-BCL6AVF5.png';
 import heroImg from '../assets/doc-header-img.svg';
 
-const Hero = () => {
+const ShowCase = () => {
   return (
     <section id="Hero-section" className=" py-10 font-outfit">
     <div className="wrapper bg-primary rounded-lg mx-auto flex items-center justify-between px-8">
@@ -32,4 +32,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default ShowCase;

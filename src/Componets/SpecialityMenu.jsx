@@ -5,28 +5,28 @@ import { Link } from "react-router";
 
 const SpecialityMenu = () => {
   return (
-    <div className="wrapper flex flex-col items-center justify-center py-10 text-center">
+    <section id="Speciality" className="wrapper flex flex-col items-center justify-center py-10 text-center">
       
-        <h1 className="text-[2.5rem] font-medium font-outfit text-primary-100 text-center pb-6">
+        <h1 className="text-[2.5rem] font-medium font-outfit text-primary-100 text-center pb-2">
           Find by Speciality{" "}
         </h1>
-        <p className="w-full max-w-[573px] text-lg leading-[27px] text-secondary-300 font-outfit text-center">
+        <p className="w-full max-w-[573px] text-lg leading-[27px] text-secondary-300 font-outfit">
           Simply browse through our extensive list of trusted doctors, schedule
           your appointment hassle-free.
         </p>
     
 
-      <div className="flex items-center justify-center gap-4 pt-20">
+      <div className="flex items-center justify-center gap-4 pt-10 w-full overflow-scroll">
            {
             specailityData?.map(({id, image, name}) => (
-              <Link key={id} to='/doctors'>
-                  <img src={image} alt={name} />
+              <Link key={id} to='/doctors' className="flex flex-col items-center text-xs  cursor-pointer flex-shrink-0 hover:translate-y-[-10px] transition-all duration-500">
+                  <img src={image} alt={name}  className="w-16 sm:w-24 mb-2"/>
                   <p className="text-lg leading-[27px] font-outfit text-secondary-300 py-4">{name}</p>
               </Link>
             ))
            }
       </div>
-    </div>
+    </section>
   );
 };
 

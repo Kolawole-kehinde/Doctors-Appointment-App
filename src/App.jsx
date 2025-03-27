@@ -1,12 +1,13 @@
 import React from 'react'
 import { Route, Routes } from 'react-router'
 import HomePage from './Pages/Homepage'
-import Navbar from './Componets/Navbar'
 import Doctors from './Pages/Doctors'
 import AboutPage from './Pages/About'
 import ContactPage from './Pages/Contact'
 import MyProfilePage from './Pages/MyProfile'
 import MyAppointment from './Pages/MyAppointment'
+import Footer from './Componets/layout/Footer'
+import Navbar from './Componets/Navbar'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
          <Route path='appointment/:docId' element={<MyAppointment/>}/>
          </Route>
       </Routes>
+      <Footer/>
       
     </>
   )

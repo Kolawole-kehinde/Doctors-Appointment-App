@@ -6,11 +6,7 @@ const Footer = () => {
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-10 lg:mt-40 text-sm">
         {/* Company Description Section */}
         <div className="w-full max-w-[646px]">
-          <img
-            src="/images/prescripto-logo.svg"
-            alt="Prescripto company logo"
-            className="w-40 mb-5"
-          />
+        <img src="/images/logo-2.png" alt="company logo" className='size-[50px] md:size-[100px] '/>
           <p className="text-lg leading-[30px]">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           </p>

@@ -2,7 +2,7 @@ import React from "react";
 
 const ShowCase = () => {
   return (
-    <section className=" font-outfit">
+    <section className=" font-outfit px-4 lg:px-0">
       <div className="wrapper bg-primary flex flex-col-reverse  md:flex-row flex-wrap rounded-lg px-6 md:px-10 lg:px-20">
         {/* Left Section */}
         <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 m-auto py-20 md:mb-[30px]">
@@ -14,7 +14,7 @@ const ShowCase = () => {
             <img
               src="/images/group_profiles.png"
               alt="group_profiles"
-              className="w-28"
+              className="w-28 hidden md:block"
             />
             <p>
               Simply browse through our extensive list of trusted doctors,{" "}

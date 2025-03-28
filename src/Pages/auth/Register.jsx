@@ -36,7 +36,7 @@ const RegisterPage = () => {
         <p className="text-lg font-normal mb-3">Please sign up to book an appointment</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {registerLists?.map(({ name, type, label, placeholder }) => (
+          {registerLists?.map(({ name, type, label}) => (
             <CustomInput
               key={name}
               type={type}

@@ -30,7 +30,7 @@ export const registerLists = [
       name: "email",
       type: "email",
       label: "Email",
-      placeholder: "Enter your email",
+    
     },
     {
       name: "password",

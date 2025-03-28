@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState } from 'react';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 const CustomInput = ({
   name,
@@ -7,21 +9,32 @@ const CustomInput = ({
   placeholder,
   className,
   register = () => {},
-  errors, // Now expects a string (error message)
+  errors,
 }) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePassword = () => {
+        setShowPassword((prev) => !prev)
+    }
+
+
   return (
     <div className="">
-      {label && <label htmlFor={name}>{label}</label>} {/* Corrected `label` */}
-      <div>
+      {label && <label htmlFor={name}>{label}</label>} 
+      <div className='relative'>
         <input
           name={name}
-          type={type}
+          type={showPassword && type === "password" ? "text" : type}
           placeholder={placeholder}
-          {...register(name)} // Properly registering with React Hook Form
+          {...register(name)}
           className={`w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-100 ${className}`}
         />
+         {type === "password" && (
+          <div className=" absolute top-1/2 right-2 -translate-y-1/2" onClick={togglePassword}> 
+            {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+          </div>
+        )}
       </div>
-      {errors && <p className="text-red-500 text-sm">{errors}</p>} {/* Display error message if exists */}
+      {errors && <p className="text-red-500 text-sm">{errors}</p>}
     </div>
   );
 };

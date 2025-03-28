@@ -18,7 +18,6 @@ const RegisterPage = () => {
                 <input
                   type={type}
                   name={name}
-                  id={name}
                   placeholder={placeholder}
                   className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-100"
                 />

@@ -26,3 +26,21 @@ export const registerLists = [
       Placeholder: "Confirm your password",
     },
 ]
+
+
+export const loginLists = [
+   
+    {
+      name: "email",
+      type: "email",
+      label: "Email",
+      Placeholder: "Enter your Email",
+    },
+    {
+      name: "password",
+      type: "password",
+      label: "Password",
+      Placeholder: "Enter your Password",
+    },
+   
+]

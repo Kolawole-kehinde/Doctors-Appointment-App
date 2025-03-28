@@ -10,7 +10,7 @@ const ShowCase = () => {
             Book Appointment <br /> 
             With Trusted Doctors
           </h1>
-          <div className="flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light">
+          <div className="flex flex-col md:flex-row items-center gap-3 mb-6 text-white text-sm font-light">
             <img
               src="/images/group_profiles.png"
               alt="group_profiles"
@@ -33,7 +33,7 @@ const ShowCase = () => {
         {/* Right Section - Hero Image */}
         <div className="md:w-1/2 relative">
           <img
-            src="/images/doc-header-img.svg"
+            src="/images/show2.png"
             alt="ShowCase-image"
             className="w-full md:absolute bottom-0 h-auto rounded-lg "
           />

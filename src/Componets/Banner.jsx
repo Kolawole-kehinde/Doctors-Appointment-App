@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 const Banner = () => {
   return (
@@ -9,7 +10,10 @@ const Banner = () => {
                <div className='text-xl sm:text-2xl md:text-3xl  lg:text-5xl font-bold text-white'>
                <p>Book Appointment </p>
                <p className='mt-4'>With 100+ Trusted Doctors</p>
-                 <button className='bg-secondary w-[214px] h-[60px] text-primary font-normal text-xl mt-6 rounded cursor-pointer outline-none hover:scale-105 transition-all'>Create account</button>
+               <Link to="/auth/register">
+               <button className='bg-secondary w-[214px] h-[60px] text-primary font-normal text-xl mt-6 rounded cursor-pointer outline-none hover:scale-105 transition-all'>Create account</button>
+               </Link>
+               
                </div>
             </div>
              <div className='hidden md:block md:w-1/2 lg:w-[380px] relative'>

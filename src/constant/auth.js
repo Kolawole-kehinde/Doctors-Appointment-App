@@ -1,46 +1,42 @@
-
-
 export const registerLists = [
     {
       name: "name",
       type: "text",
       label: "Name",
-      Placeholder: "Enter your name",
+     
     },
     {
       name: "email",
       type: "email",
       label: "Email",
-      Placeholder: "Enter your Email",
+
     },
     {
       name: "password",
       type: "password",
       label: "Password",
-      Placeholder: "Enter your Password",
+  
     },
     {
-      name: "password",
+      name: "confirmPassword",
       type: "password",
       label: "Confirm Password",
-      Placeholder: "Confirm your password",
+     
     },
-]
-
-
-export const loginLists = [
-   
+  ];
+  
+  export const loginLists = [
     {
       name: "email",
       type: "email",
       label: "Email",
-      Placeholder: "Enter your Email",
+      placeholder: "Enter your email",
     },
     {
       name: "password",
       type: "password",
       label: "Password",
-      Placeholder: "Enter your Password",
+    
     },
-   
-]
+  ];
+  

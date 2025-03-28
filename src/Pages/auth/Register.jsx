@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const RegisterPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Registration Page</h2>
         <form className="space-y-4">
@@ -58,7 +59,7 @@ const RegisterPage = () => {
           </button>
         </form>
         <p className="text-center text-gray-600 mt-6">
-          Already have an account? <a href="/login" className="text-primary-100 hover:underline">Sign in</a>
+          Already have an account? <Link to="/auth/login" className="text-primary hover:underline">Sign in</Link>
         </p>
       </div>
     </div>

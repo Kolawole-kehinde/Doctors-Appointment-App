@@ -1,5 +1,6 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
+
 
 const CustomButton = () => {
   const navigate = useNavigate();
@@ -13,3 +14,5 @@ const CustomButton = () => {
 }
 
 export default CustomButton
+
+

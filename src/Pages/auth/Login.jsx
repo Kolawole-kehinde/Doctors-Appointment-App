@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { loginLists } from '../../constant/auth';
+import CustomInput from '../../Componets/CustomInput';
 
 const LoginPage = () => {
   return (
@@ -9,15 +10,13 @@ const LoginPage = () => {
       <p className='text-lg font-normal mb-3'>Please login to book appointment</p>
       {
        loginLists?.map(({name, type, label, placeholder}) => (
-        <div key={name}>
-        <label htmlFor="email" className="block text-gray-700">{label}</label>
-        <input
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-100"
+        <CustomInput
+        key={name}
+        name={name}
+        type={type}
+        label={label}
+        placeholder={placeholder}
         />
-      </div>
 
        )) 
       }

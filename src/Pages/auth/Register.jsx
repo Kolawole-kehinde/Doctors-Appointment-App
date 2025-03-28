@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { registerLists } from '../../constant/auth';
+import CustomInput from '../../Componets/CustomInput';
 
 
 const RegisterPage = () => {
@@ -13,15 +14,13 @@ const RegisterPage = () => {
         <form className="space-y-4">
           {
             registerLists?.map(({ name, type, label, placeholder }) => (
-              <div key={name} className="mb-4">
-                <label htmlFor={name} className="block text-gray-700">{label}</label>
-                <input
-                  type={type}
-                  name={name}
-                  placeholder={placeholder}
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-100"
-                />
-              </div>
+               <CustomInput
+                key={name}
+                type={type}
+                name={name}
+                label={label}
+                placeholder={placeholder}
+               />
             ))
           }
 

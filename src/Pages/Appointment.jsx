@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { AppContext } from '../context/AppContext';
 import { format, addDays, setHours, setMinutes, isSameDay } from 'date-fns';
+import RelatedDoctors from '../Componets/RelatedDoctors';
 
 const AppointmentPage = () => {
   const { docId } = useParams();
@@ -70,7 +71,7 @@ const AppointmentPage = () => {
             <button className='text-base py-0.5 px-2 border rounded-full'>{docInfo.experience}</button>
           </div>
           <div>
-            <p className='flex items-center gap-1 text-lg font-medium text-primary-300 mt-3'>
+            <p className='flex items-center gap-1 text-lg font-medium text-secondary-300 mt-3'>
               About <img src="/images/info.png" alt="info-logo" className='size-[17px]' />
             </p>
             <p className='text-lg text-secondary-300 max-w-[700px] mt-1'>{docInfo.about}</p>
@@ -82,8 +83,8 @@ const AppointmentPage = () => {
       </div>
 
       {/* Booking Slots */}
-      <div className='sm:ml-72 sm:pl-4 mt-4 font-medium text-secondary-300'>
-        <p>Booking Slots</p>
+      <div className='sm:ml-72 sm:pl-4 mt-8  mb-20'>
+        <p className='text-[25px] text-secondary-400 font-medium'>Booking Slots</p>
         <div className='w-full flex gap-3 items-center overflow-x-auto mt-4'>
           {docSlots.map((item, index) => (
             <div
@@ -114,6 +115,10 @@ const AppointmentPage = () => {
         </div>
         <button className='bg-primary text-white text-sm font-light px-14 py-3 rounded my-6'>Appointment</button>
       </div>
+
+
+       {/* ------------------Listing Related Doctors----------------------- */}
+       <RelatedDoctors docId={docId} speciality={docInfo.speciality}/>
     </div>
   );
 };

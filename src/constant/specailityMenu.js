@@ -1,4 +1,4 @@
-export const specailityData = [
+export const specialityData = [
     {
       id: "GP001",
       speciality: "General physician",

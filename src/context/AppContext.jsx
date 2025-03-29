@@ -5,10 +5,11 @@ export const  AppContext = createContext();
 
 
 const AppContextProvider = ({children}) =>{
-   
+    const currentSymbol = '$'
     return (
      <AppContext.Provider value={{
-        doctors
+        doctors,
+        currentSymbol
      }} >
         {children}
      </AppContext.Provider> 

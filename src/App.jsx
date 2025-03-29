@@ -4,12 +4,13 @@ import HomePage from "./Pages/Homepage";
 import AboutPage from "./Pages/About";
 import ContactPage from "./Pages/Contact";
 import MyProfilePage from "./Pages/MyProfile";
-import MyAppointment from "./Pages/MyAppointment";
 import Footer from "./Componets/layout/Footer";
 import Navbar from "./Componets/layout/Navbar";
 import LoginPage from "./Pages/auth/Login";
 import RegisterPage from "./Pages/auth/Register";
 import Doctors from "./Pages/Doctors";
+import AppointmentPage from "./Pages/Appointment";
+import MyAppointment from './Pages/MyAppointment'
 
 const App = () => {
   return (
@@ -28,8 +29,8 @@ const App = () => {
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="profile" element={<MyProfilePage />} />
-          <Route path="my-appointment" element={<MyAppointment />} />
-          <Route path="appointment/:docId" element={<MyAppointment />} />
+          <Route path="my-appointment" element={<MyAppointment/>} />
+          <Route path="appointment/:docId" element={<AppointmentPage/>} />
         </Route>
       </Routes>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { specailityData } from "../constant/specailityMenu";
-import { Link } from "react-router";
+import { Link} from "react-router";
 
 
 const SpecialityMenu = () => {
@@ -18,10 +18,10 @@ const SpecialityMenu = () => {
 
       <div className="flex items-center justify-center gap-4 pt-10 w-full overflow-scroll">
            {
-            specailityData?.map(({id, image, name}) => (
-              <Link key={id} to='/doctors' className="flex flex-col items-center text-xs  cursor-pointer flex-shrink-0 hover:translate-y-[-10px] transition-all duration-500">
-                  <img src={image} alt={name}  className="w-16 sm:w-24 mb-2"/>
-                  <p className="text-lg leading-[27px] font-outfit text-secondary-300 py-4">{name}</p>
+            specailityData?.map(({id, image, speciality}) => (
+              <Link key={id} to={`/doctors/${speciality}`} className="flex flex-col items-center text-xs  cursor-pointer flex-shrink-0 hover:translate-y-[-10px] transition-all duration-500">
+                  <img src={image} alt={speciality}  className="w-16 sm:w-24 mb-2"/>
+                  <p className="text-lg leading-[27px] font-outfit text-secondary-300 py-4">{speciality}</p>
               </Link>
             ))
            }

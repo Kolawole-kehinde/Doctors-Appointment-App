@@ -21,6 +21,7 @@ const TopDoctors = () => {
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-5 sm:px-0">
           {topDoctors.map(({ id, image, name, speciality }) => (
             <div
+            onClick={() => navigate(`/appointment/${id}`)}
               key={id}
               className="border border-blue-200  rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-500"
             >

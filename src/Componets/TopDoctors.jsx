@@ -10,8 +10,8 @@ const TopDoctors = () => {
   
   return (
     <section className="wrapper py-5 font-outfit px-4 lg:px-0">
-      <div className="flex flex-col items-center text-center gap-4 text-gray-900 md:mx-10">
-        <h1 className="text-[2.5rem] font-medium text-primary-100">
+      <div className="flex flex-col items-center text-center  md:gap-4 text-gray-900 md:mx-10">
+        <h1 className="text-3xl md:text-[2.5rem] font-medium text-primary-100">
           Top Doctors to Book
         </h1>
         <p className="text-lg leading-7 text-secondary-300">

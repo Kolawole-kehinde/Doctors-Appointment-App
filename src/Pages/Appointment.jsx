@@ -84,7 +84,7 @@ const AppointmentPage = () => {
 
       {/* Booking Slots */}
       <div className='sm:ml-72 sm:pl-4 mt-8  mb-20'>
-        <p className='text-[25px] text-secondary-400 font-medium'>Booking Slots</p>
+        <p className='text-lg md:text-[25px] text-secondary-400 font-medium'>Booking Slots</p>
         <div className='w-full flex gap-3 items-center overflow-x-auto mt-4'>
           {docSlots.map((item, index) => (
             <div

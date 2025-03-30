@@ -19,7 +19,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
   return (
     <div className="flex flex-col items-center text-center  text-gray-900 md:mx-10">
       {/* Title & Description */}
-      <h1 className="text-[2.5rem] font-medium text-primary-100">
+      <h1 className="text-2xl md:text-[2.5rem] font-medium text-primary-100">
       Related Doctors
       </h1>
       <p className="text-lg leading-7 text-secondary-300">

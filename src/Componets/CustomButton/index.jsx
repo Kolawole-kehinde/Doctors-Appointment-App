@@ -15,7 +15,7 @@ const CustomButton = () => {
           <img src="/images/khennycool.jpeg" alt="profile-pic"  className="w-8 rounded-full"/>
           <IoIosArrowDown fontSize={20}/>
             <div className="absolute right-0 top-0 pt-14 text-base font-medium text-secondary-200 z-20  hidden group-hover:block">
-               <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-2 p-4">
+               <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-2 p-4 capitalize">
                    <p onClick={() => navigate('profile')} className="hover:text-black cursor-pointer">my Profile</p>
                    <p onClick={() => navigate('my-appointment')} className="hover:text-black cursor-pointer">my Appointment</p>
                    <p onClick={() => setToken(false)} className="hover:text-black cursor-pointer">Logout</p>

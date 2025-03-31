@@ -3,7 +3,8 @@ import React, { useState } from "react";
 const MyProfilePage = () => {
   const [userData, setUserData] = useState({
     name: "Kolawole Kehinde",
-    image: "https://res.cloudinary.com/daarrcw3q/image/upload/v1743400008/khennycool_kolspu.jpg",
+    image:
+      "https://res.cloudinary.com/daarrcw3q/image/upload/v1743400008/khennycool_kolspu.jpg",
     email: "kolawolekehinde7033@gmail.com",
     phone: "+234 703 736 1571",
     address: {
@@ -16,40 +17,52 @@ const MyProfilePage = () => {
 
   const [isEdit, setIsEdit] = useState(false);
 
-  // Handle input changes
-  const handleChange = (field, value) => {
-    setUserData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  // Handle address change separately
-  const handleAddressChange = (field, value) => {
-    setUserData((prev) => ({
-      ...prev,
-      address: { ...prev.address, [field]: value },
-    }));
+  // Handle profile picture change
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setUserData((prev) => ({ ...prev, image: imageUrl }));
+    }
   };
 
   return (
-    <div className="wrapper max-w-lg flex flex-col gap-4 text-base font-outfit">
-      <img src={userData.image} alt="Profile" className="w-36 rounded" />
-      
-      {/* Name Field */}
+    <div className="wrapper max-w-lg flex flex-col gap-2 text-base font-outfit px-4">
+      <div className="relative w-36">
+        <img src={userData.image} alt="profile-picture" className="w-36 rounded border-2 border-gray-300" />
+        {isEdit && (
+          <div className="mt-2">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="text-sm text-gray-500"
+            />
+          </div>
+        )}
+      </div>
+
       {isEdit ? (
         <input
           type="text"
           value={userData.name}
-          onChange={(e) => handleChange("name", e.target.value)}
-          className="text-2xl font-medium max-w-80 mt-4 border-b border-gray-300 focus:outline-none"
+          onChange={(e) =>
+            setUserData((prev) => ({ ...prev, name: e.target.value }))
+          }
+          className="text-[2rem] font-medium max-w-80 mt-4 border border-gray-300 p-1"
         />
       ) : (
-        <p className="font-medium text-2xl text-neutral-800 mt-4 capitalize">{userData.name}</p>
+        <p className="font-medium text-[2rem] text-neutral-800 mt-4 capitalize">
+          {userData.name}
+        </p>
       )}
 
       <hr className="bg-secondary-100 h-[1px] w-full border-none" />
 
-      {/* Contact Information */}
       <div>
-        <p className="text-base text-secondary-500 underline mt-3 uppercase">Contact Information</p>
+        <p className="text-base text-secondary-500 underline mt-3 uppercase">
+          CONTACT INFORMATION
+        </p>
         <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-secondary-200">
           <p className="text-lg text-secondary-300">Email:</p>
           <p className="text-primary text-lg">{userData.email}</p>
@@ -59,8 +72,10 @@ const MyProfilePage = () => {
             <input
               type="text"
               value={userData.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              className="bg-gray-100 w-36 px-2 py-1 border rounded"
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, phone: e.target.value }))
+              }
+              className="border border-gray-300 p-1"
             />
           ) : (
             <p className="text-lg text-primary">{userData.phone}</p>
@@ -68,20 +83,31 @@ const MyProfilePage = () => {
 
           <p className="text-lg text-secondary-300">Address:</p>
           {isEdit ? (
-            <div>
+            <>
               <input
                 type="text"
                 value={userData.address.line1}
-                onChange={(e) => handleAddressChange("line1", e.target.value)}
-                className="bg-gray-100 w-full px-2 py-1 border rounded mb-2"
+                onChange={(e) =>
+                  setUserData((prev) => ({
+                    ...prev,
+                    address: { ...prev.address, line1: e.target.value },
+                  }))
+
+                }
+                className="border border-gray-300 p-1"
               />
               <input
                 type="text"
                 value={userData.address.line2}
-                onChange={(e) => handleAddressChange("line2", e.target.value)}
-                className="bg-gray-100 w-full px-2 py-1 border rounded"
+                onChange={(e) =>
+                  setUserData((prev) => ({
+                    ...prev,
+                    address: { ...prev.address, line2: e.target.value },
+                  }))
+                }
+                className="border border-gray-300 p-1"
               />
-            </div>
+            </>
           ) : (
             <p className="text-lg text-secondary-600">
               {userData.address.line1}
@@ -92,16 +118,19 @@ const MyProfilePage = () => {
         </div>
       </div>
 
-      {/* Basic Information */}
       <div>
-        <p className="text-base text-secondary-500 underline mt-3 uppercase">Basic Information</p>
+        <p className="text-base text-secondary-500 underline mt-3 uppercase">
+          BASIC INFORMATION
+        </p>
         <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-secondary-200">
           <p className="text-lg text-secondary-300">Gender:</p>
           {isEdit ? (
             <select
               value={userData.gender}
-              onChange={(e) => handleChange("gender", e.target.value)}
-              className="max-w-32 bg-gray-100 px-2 py-1 border rounded"
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, gender: e.target.value }))
+              }
+           className="border border-gray-300 p-1"
             >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -115,9 +144,11 @@ const MyProfilePage = () => {
             <input
               type="date"
               value={userData.dob}
-              max={new Date().toISOString().split("T")[0]} // Ensures only past or current dates can be selected
-              onChange={(e) => handleChange("dob", e.target.value)}
-              className="max-w-32 bg-gray-100 px-2 py-1 border rounded"
+              max={new Date().toISOString().split("T")[0]} // Restrict to current date
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, dob: e.target.value }))
+              }
+            className="border border-gray-300 p-1"
             />
           ) : (
             <p className="text-lg text-secondary-600">{userData.dob}</p>
@@ -125,14 +156,13 @@ const MyProfilePage = () => {
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="mt-10">
         {isEdit ? (
           <button
             onClick={() => setIsEdit(false)}
             className="border border-primary px-8 py-2 rounded hover:bg-primary hover:text-white transition-all"
           >
-            Save Information
+            Save information
           </button>
         ) : (
           <button

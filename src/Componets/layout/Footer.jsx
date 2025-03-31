@@ -4,7 +4,7 @@ import Logo from './logo';
 const Footer = () => {
   return (
     <footer className="wrapper py-10 font-outfit px-4 lg:px-0 text-secondary-300">
-      <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-10 lg:mt-40 text-sm">
+      <div className="flex flex-col lg:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-10 lg:mt-40 text-sm">
         {/* Company Description Section */}
         <div className="w-full max-w-[646px]">
           <Logo/>

@@ -23,7 +23,7 @@ const Navbar = () => {
           className="block md:hidden"
           onClick={toggleMenu}
         />
-        <Menu menuStyle="hidden md:flex items-center font-poppins gap-[1.25rem] text-base leading-[24px] font-medium text-center uppercase" />
+        <Menu menuStyle="hidden lg:flex items-center font-poppins gap-[1.25rem] text-base leading-[24px] font-medium text-center uppercase" />
         <CustomButton />
       </nav>
 

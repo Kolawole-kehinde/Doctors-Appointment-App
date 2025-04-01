@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="py-4">
+    <header className="py-4 md:px-4 lg:px-0">
       <nav className="wrapper flex items-center justify-between px-4 md:px-0 border-b border-secondary-100">
         <Logo />
         <IoMenu

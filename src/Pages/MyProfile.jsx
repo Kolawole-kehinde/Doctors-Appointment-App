@@ -8,8 +8,7 @@ const MyProfilePage = () => {
     email: "kolawolekehinde7033@gmail.com",
     phone: "+234 703 736 1571",
     address: {
-      line1: "57th Cross, Richmond",
-      line2: "Circle, Church Road, London",
+      line1: "Circle, Church Road, London",
     },
     gender: "Male",
     dob: "2000-01-19",
@@ -27,7 +26,7 @@ const MyProfilePage = () => {
   };
 
   return (
-    <div className="wrapper max-w-lg flex flex-col gap-2 text-base font-outfit px-4">
+    <div className="wrapper max-w-lg flex flex-col gap-2 text-base font-outfit px-4 lg:px-0">
       <div className="relative w-36">
         <img src={userData.image} alt="profile-picture" className="w-36 rounded border-2 border-gray-300" />
         {isEdit && (
@@ -65,7 +64,7 @@ const MyProfilePage = () => {
         </p>
         <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-secondary-200">
           <p className="text-lg text-secondary-300">Email:</p>
-          <p className="text-primary text-lg">{userData.email}</p>
+          <p className="text-primary text-base ml-2">{userData.email}</p>
 
           <p className="text-lg text-secondary-300">Phone:</p>
           {isEdit ? (
@@ -75,7 +74,7 @@ const MyProfilePage = () => {
               onChange={(e) =>
                 setUserData((prev) => ({ ...prev, phone: e.target.value }))
               }
-              className="border border-gray-300 p-1"
+              className="border border-gray-300 p-1 ml-3 md:ml-0"
             />
           ) : (
             <p className="text-lg text-primary">{userData.phone}</p>
@@ -94,25 +93,15 @@ const MyProfilePage = () => {
                   }))
 
                 }
-                className="border border-gray-300 p-1"
+                className="border border-gray-300 p-1 ml-3  md:ml-0"
               />
-              <input
-                type="text"
-                value={userData.address.line2}
-                onChange={(e) =>
-                  setUserData((prev) => ({
-                    ...prev,
-                    address: { ...prev.address, line2: e.target.value },
-                  }))
-                }
-                className="border border-gray-300 p-1"
-              />
+              
             </>
           ) : (
             <p className="text-lg text-secondary-600">
               {userData.address.line1}
               <br />
-              {userData.address.line2}
+            
             </p>
           )}
         </div>

@@ -7,7 +7,7 @@ const CustomButton = () => {
   const [token, setToken] = useState(true);
   const navigate = useNavigate();
   return (
-    <div className="hidden md:block">
+    <div className="">
       {token ? (
         <div className="flex items-center gap-2 cursor-pointer group relative">
           <img src="/images/khennycool.jpeg" alt="profile-pic"  className="w-8 rounded-full"/>

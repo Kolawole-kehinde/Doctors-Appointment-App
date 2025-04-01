@@ -18,13 +18,16 @@ const Navbar = () => {
     <header className="py-4 md:px-4 lg:px-0">
       <nav className="wrapper flex items-center justify-between px-4 md:px-0 border-b border-secondary-100">
         <Logo />
+       
+        <Menu menuStyle="hidden lg:flex items-center font-poppins gap-[1.25rem] text-base leading-[24px] font-medium text-center uppercase" />
+       <div className="flex items-center gap-2">
+       <CustomButton />
         <IoMenu
           fontSize={30}
           className="block md:hidden"
           onClick={toggleMenu}
         />
-        <Menu menuStyle="hidden lg:flex items-center font-poppins gap-[1.25rem] text-base leading-[24px] font-medium text-center uppercase" />
-        <CustomButton />
+       </div>
       </nav>
 
       {menuOpen && (

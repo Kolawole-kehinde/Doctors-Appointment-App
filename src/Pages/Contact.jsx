@@ -18,7 +18,7 @@ const ContactPage = () => {
         </div>
 
         {/* Contact Details */}
-        <article className="text-center md:text-left">
+        <article className="text-start">
           <h3 className="text-2xl font-semibold text-secondary-300 uppercase">
             Our Office
           </h3>

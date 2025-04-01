@@ -14,7 +14,7 @@ const TopDoctors = () => {
         <h1 className="text-3xl md:text-[2.5rem] font-medium text-primary-100">
           Top Doctors to Book
         </h1>
-        <p className="text-lg leading-7 text-secondary-300">
+        <p className="text-base md:text-lg leading-7 text-secondary-300">
           Simply browse through our extensive list of trusted doctors.
         </p>
 

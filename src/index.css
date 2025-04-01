@@ -9,6 +9,6 @@
 .wrapper{
   @apply container w-full max-w-[1228.8px] mx-auto
 }
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
   @apply hidden
-}
+} */

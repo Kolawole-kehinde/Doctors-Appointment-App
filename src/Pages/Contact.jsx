@@ -3,7 +3,7 @@ import React from 'react';
 const ContactPage = () => {
   return (
     <section className="wrapper px-4 lg:px-0 font-outfit text-secondary-300">
-      <h1 className="text-[1.875rem] font-normal text-secondary-100 py-10 text-center">
+      <h1 className="text-2xl md:text-[1.875rem] font-normal text-secondary-100 py-10 text-center">
         CONTACT <span className="font-semibold text-black">Us</span>
       </h1>
 
@@ -13,13 +13,13 @@ const ContactPage = () => {
           <img 
             src="/images/contact_image.png" 
             alt="Contact Us Illustration" 
-            className="w-[300px] md:w-[400px] object-cover" 
+            className="w-full md:w-[400px] object-cover" 
           />
         </div>
 
         {/* Contact Details */}
         <article className="text-start">
-          <h3 className="text-2xl font-semibold text-secondary-300 uppercase">
+          <h3 className="text-lg md:text-2xl font-semibold text-secondary-300 uppercase">
             Our Office
           </h3>
           <p className="text-lg py-5 max-w-[325px]">
@@ -28,7 +28,7 @@ const ContactPage = () => {
           <p className="text-lg">Tel: <a href="tel:+2347037361571" className="hover:underline">+234 703 736 1571</a></p>
           <p className="text-lg">Email: <a href="mailto:kolawolekehinde7033@gmail.com" className="hover:underline">kolawolekehinde7033@gmail.com</a></p>
 
-          <h3 className="text-2xl font-semibold uppercase mt-6">
+          <h3 className="text-lg md:text-2xl  font-semibold uppercase mt-6">
             Careers at PRESCRIPTO
           </h3>
           <p className="text-lg py-4 max-w-[464px]">

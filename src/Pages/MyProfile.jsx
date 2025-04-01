@@ -7,9 +7,7 @@ const MyProfilePage = () => {
       "https://res.cloudinary.com/daarrcw3q/image/upload/v1743400008/khennycool_kolspu.jpg",
     email: "kolawolekehinde7033@gmail.com",
     phone: "+234 703 736 1571",
-    address: {
-      line1: "Circle, Church Road, London",
-    },
+    address: "Circle, Church Road, London",
     gender: "Male",
     dob: "2000-01-19",
   });
@@ -85,11 +83,11 @@ const MyProfilePage = () => {
             <>
               <input
                 type="text"
-                value={userData.address.line1}
+                value={userData.address}
                 onChange={(e) =>
                   setUserData((prev) => ({
                     ...prev,
-                    address: { ...prev.address, line1: e.target.value },
+                    address: { ...prev, address: e.target.value },
                   }))
 
                 }
@@ -99,7 +97,7 @@ const MyProfilePage = () => {
             </>
           ) : (
             <p className="text-lg text-secondary-600">
-              {userData.address.line1}
+              {userData.address}
               <br />
             
             </p>

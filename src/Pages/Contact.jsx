@@ -37,7 +37,7 @@ const ContactPage = () => {
 
           {/* Explore Jobs Button */}
           <button 
-            className="px-8 py-3 border text-base cursor-pointer rounded hover:bg-primary hover:text-white transition-all duration-300" 
+            className="px-8 py-3 mt-5 border text-base cursor-pointer rounded hover:bg-primary hover:text-white transition-all duration-300" 
             role="button"
           >
             Explore Jobs

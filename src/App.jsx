@@ -11,28 +11,35 @@ import RegisterPage from "./Pages/auth/Register";
 import Doctors from "./Pages/Doctors";
 import AppointmentPage from "./Pages/Appointment";
 import MyAppointment from './Pages/MyAppointment'
+import ProtectedRoute from "./Componets/ProtectedRoute/ProtectedRoute";
 
 const App = () => {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/">
-          <Route path="auth">
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
-          </Route>
+  <Route path="/">
+    {/* Auth Routes */}
+    <Route path="auth">
+      <Route path="login" element={<LoginPage />} />
+      <Route path="register" element={<RegisterPage />} />
+    </Route>
 
-          <Route index element={<HomePage />} />
-          <Route path="doctors/:speciality?" element={<Doctors />} />
+    {/* Public Routes */}
+    <Route index element={<HomePage />} />
+    <Route path="doctors/:speciality?" element={<Doctors />} />
+    <Route path="about" element={<AboutPage />} />
+    <Route path="contact" element={<ContactPage />} />
 
-          <Route path="about" element={<AboutPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="profile" element={<MyProfilePage />} />
-          <Route path="my-appointment" element={<MyAppointment/>} />
-          <Route path="appointment/:docId" element={<AppointmentPage/>} />
-        </Route>
-      </Routes>
+    {/* Protected Routes */}
+    <Route element={<ProtectedRoute />}>
+      <Route path="profile" element={<MyProfilePage />} />
+      <Route path="my-appointment" element={<MyAppointment />} />
+      <Route path="appointment/:docId" element={<AppointmentPage />} />
+    </Route>
+  </Route>
+</Routes>
+
 
       <Footer />
     </>

@@ -6,11 +6,12 @@ import { loginSchema } from '../../schema/authSchema';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router';
-import { supabase } from '../../libs/supabase';
+import { signInApi } from '../../services/auth';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,33 +26,31 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data) => {
-    const { email, password } = data; 
-
-    setLoading(true); 
+    setLoading(true);
 
     try {
-      const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+      const res = await signInApi(data);
+      console.log("User logged in:", res);
 
-      if (error) {
-        toast.error(error.message);
-        setLoading(false); 
-      } else {
-        toast.success("Login Successful");
-        navigate("/profile"); 
-        setLoading(false);
-      }
-    } catch (err) {
-      toast.error("Something went wrong. Please try again."); 
-      setLoading(false); 
+      toast.success("User logged in successfully!");
+      reset(); // Reset form after successful login
+
+      navigate("/profile"); // Navigate correctly
+    } catch (error) {
+      console.error("Login error:", error.message);
+      toast.error(error?.message || "Login failed, please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    reset();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md mx-auto mt-20 p-6 shadow-lg rounded-lg bg-white text-secondary-300">
+    <form 
+      onSubmit={handleSubmit(onSubmit)} 
+      className="space-y-4 w-full max-w-md mx-auto mt-20 p-6 shadow-lg rounded-lg bg-white text-secondary-300"
+    >
       <h2 className="text-[26px] font-semibold">Login</h2>
-      <p className='text-lg font-normal mb-3'>Please login to book appointment</p>
+      <p className='text-lg font-normal mb-3'>Please login to book an appointment</p>
 
       {loginLists?.map(({ name, type, label }) => (
         <CustomInput
@@ -73,7 +72,7 @@ const LoginPage = () => {
       </button>
 
       <p className="text-sm text-gray-600 text-center">
-        Don’t have an account?{' '}
+        Don’t have an account?{" "}
         <Link to="/auth/register" className="text-primary text-base hover:underline">
           Register here
         </Link>

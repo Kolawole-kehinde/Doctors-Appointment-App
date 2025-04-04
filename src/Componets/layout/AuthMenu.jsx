@@ -1,11 +1,10 @@
-import React from "react";
-import { IoIosArrowDown } from "react-icons/io";
-import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../hooks/useAuth";
+import { IoIosArrowDown } from "react-icons/io";
 
 const AuthMenu = ({ menuStyle, toggleMenu }) => {
+  const { user, handleLogout, loading } = useAuth();
   const navigate = useNavigate();
-  const { loading, handleLogout } = useAuth();
 
   return (
     <menu className={menuStyle}>
@@ -25,7 +24,7 @@ const AuthMenu = ({ menuStyle, toggleMenu }) => {
               }}
               className="hover:text-black cursor-pointer"
             >
-              {loading ? "Logging Out" : "Logout"}
+              {loading ? "Logging Out..." : "Logout"}
             </button>
           </div>
         </div>
@@ -33,5 +32,4 @@ const AuthMenu = ({ menuStyle, toggleMenu }) => {
     </menu>
   );
 };
-
 export default AuthMenu;

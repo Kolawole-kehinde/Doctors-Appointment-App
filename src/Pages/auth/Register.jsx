@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { registerLists } from "../../constant/auth";
 import CustomInput from "../../Componets/CustomInput";
 import { useForm } from "react-hook-form";
@@ -7,8 +7,10 @@ import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router";
 import { signUpApi } from "../../services/auth";
+import { AppContext } from "../../context/AppContext";
 
 const RegisterPage = () => {
+  const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -40,12 +42,13 @@ const RegisterPage = () => {
       console.log("User registered:", res);
 
       toast.success("User registered successfully!");
+      setUser(res);
       reset();
-      navigate("/profile"); // Corrected navigation
+      navigate("/profile"); 
 
     } catch (error) {
       console.error("Registration error:", error.message);
-      toast.error(error.message); // Show error message
+      toast.error(error.message); 
     } finally {
       setLoading(false);
     }

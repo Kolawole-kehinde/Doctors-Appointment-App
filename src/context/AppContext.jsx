@@ -6,10 +6,9 @@ import { supabase } from "../libs/supabase";
 import { useNavigate } from "react-router";
 
 
-
 export const AppContext = createContext({
   user: null,
-  setdata: (data) => {},
+  setUser: (data) => {},
   handleLogout: () => {},
   loading: false,
 });

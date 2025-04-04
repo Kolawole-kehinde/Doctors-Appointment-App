@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { loginLists } from '../../constant/auth';
 import CustomInput from '../../Componets/CustomInput';
 import { useForm } from 'react-hook-form';
@@ -7,8 +7,10 @@ import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router';
 import { signInApi } from '../../services/auth';
+import { AppContext } from '../../context/AppContext';
 
 const LoginPage = () => {
+  const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -33,9 +35,10 @@ const LoginPage = () => {
       console.log("User logged in:", res);
 
       toast.success("User logged in successfully!");
-      reset(); // Reset form after successful login
+      setUser(res);
+      reset(); 
 
-      navigate("/profile"); // Navigate correctly
+      navigate("/profile"); 
     } catch (error) {
       console.error("Login error:", error.message);
       toast.error(error?.message || "Login failed, please try again.");

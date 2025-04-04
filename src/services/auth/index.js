@@ -1,9 +1,8 @@
 import { supabase } from "../../libs/supabase";
 
 export const signUpApi = async (payload) => { 
-    const { name, email, password } = payload; // Extract correct fields
+    const { name, email, password } = payload;
 
-    // First, sign up the user in Supabase Auth
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -11,11 +10,11 @@ export const signUpApi = async (payload) => {
 
     if (error) throw new Error(error.message);
 
-    // If user is successfully created, insert details into the 'users' table
+ 
     if (data?.user) { 
         const { data: userData, error: userError } = await supabase
             .from("users")
-            .insert([{ name, email, password }]) // Correct field names
+            .insert([{ name, email, password }])
             .select()
             .single();
 
@@ -29,7 +28,7 @@ export const signUpApi = async (payload) => {
 export const signInApi = async (payload) => {
     const { email, password } = payload;
   
-    // Step 1: Authenticate user with Supabase Auth
+ 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -37,7 +36,7 @@ export const signInApi = async (payload) => {
   
     if (error) throw new Error(error.message);
   
-    // Step 2: Retrieve user details from users table
+   
     if (data?.user) {
       const { data: userData, error: userError } = await supabase
         .from("users")
@@ -47,7 +46,7 @@ export const signInApi = async (payload) => {
   
       if (userError) throw new Error(userError.message);
   
-      return userData; // Return user details
+      return userData; 
     }
   };
   

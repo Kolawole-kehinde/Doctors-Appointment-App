@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/useAuth";
 const Menu = ({ toggleMenu, menuStyle}) => {
   const active = (isActive) => (isActive ? "text-primary" : "text-gray-500");
 
-  const { user} = useAuth();
+  const { user } = useAuth();
 
   return (
     <menu className={menuStyle}>
@@ -16,7 +16,8 @@ const Menu = ({ toggleMenu, menuStyle}) => {
       ) : (
         navRoutes?.map(({ id, name, path }) => (
           <li key={id}>
-            <NavLink to={path} className={({ isActive }) => active(isActive)} onClick={toggleMenu}>
+            <NavLink to={path} className={({ isActive }) => active(isActive)}
+            onClick={toggleMenu}>
               {name}
             </NavLink>
           </li>

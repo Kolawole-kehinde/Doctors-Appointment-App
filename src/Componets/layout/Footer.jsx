@@ -36,7 +36,7 @@ const Footer = () => {
 
       {/* Copyright Section */}
       <p className="text-sm md:text-lg leading-[30px] text-center py-4 border-t border-secondary-100">
-        Copyright © 2024 GreatStack - All Rights Reserved.
+        Copyright © 2024 Khennycool - All Rights Reserved.
       </p>
     </footer>
   );

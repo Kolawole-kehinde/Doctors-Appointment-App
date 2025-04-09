@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from './Logo';
 
 
+
 const Footer = () => {
   return (
     <footer className="wrapper py-10 font-outfit px-4 lg:px-0 text-secondary-300">

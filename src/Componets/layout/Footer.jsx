@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from './Logo';
 
 
 const Footer = () => {
@@ -8,7 +7,7 @@ const Footer = () => {
       <div className="flex flex-col lg:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-10 lg:mt-40 text-sm">
         {/* Company Description Section */}
         <div className="w-full max-w-[646px]">
-          <Logo/>
+  
           <p className="text-base leading-[25px] md:text-lg md:leading-[30px]">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           </p>

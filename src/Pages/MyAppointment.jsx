@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AppContext } from "../context/AppContext";
 import { supabase } from "../libs/supabase";
-
 
 const MyAppointment = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Replace with your current logged-in user ID
-  const userId = "your-user-id"; // Ideally, get this from auth/session
+  const { user } = useContext(AppContext); // Make sure `user` has an `id`
 
   useEffect(() => {
     const fetchAppointments = async () => {
+      if (!user?.id) return;
+
       const { data, error } = await supabase
         .from("appointments")
-        .select("*, doctors(*)") // joins doctor details
-        .eq("user_id", userId)
+        .select("*, doctors(*)") // Join with doctors table
+        .eq("user_id", user.id)
         .order("appointment_date", { ascending: false });
 
       if (error) {
@@ -27,7 +28,7 @@ const MyAppointment = () => {
     };
 
     fetchAppointments();
-  }, [userId]);
+  }, [user?.id]);
 
   if (loading) {
     return (

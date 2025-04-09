@@ -15,7 +15,6 @@ const Doctors = () => {
         )
       : doctors;
   }, [doctors, speciality]);
-  
 
   const specialties = [
     "General Physician",
@@ -27,7 +26,17 @@ const Doctors = () => {
   ];
 
   const handleSpecialtyClick = (item) => {
-    navigate(speciality === item ? "/doctors" : `/doctors/${item}`);
+    // Check if the current specialty is already selected
+    if (speciality === item) {
+      navigate("/doctors");
+    } else {
+      navigate(`/doctors/${item}`);
+    }
+    setShowFilter(false);
+  };
+
+  const handleClearFilter = () => {
+    navigate("/doctors");
     setShowFilter(false);
   };
 
@@ -55,6 +64,13 @@ const Doctors = () => {
             showFilter ? "flex" : "hidden md:flex"
           }`}
         >
+          {/* "View All" button */}
+          <p
+            onClick={handleClearFilter}
+            className="w-full md:w-[200px] p-2 border border-gray-300 rounded transition-all cursor-pointer hover:bg-gray-100"
+          >
+            View All
+          </p>
           {specialties.map((item) => (
             <p
               key={item}
@@ -67,7 +83,7 @@ const Doctors = () => {
         </div>
 
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          {filteredDoctors.map(({ id, image_url, name, speciality }) => (
+          {filteredDoctors.map(({ id, image_url, name, specialty }) => (
             <div
               key={id}
               onClick={() => navigate(`/appointment/${id}`)}
@@ -86,7 +102,7 @@ const Doctors = () => {
                 <p className="text-primary-100 text-base lg:text-xl font-medium">
                   {name}
                 </p>
-                <p className="text-sm text-gray-700 pb-4">{speciality}</p>
+                <p className="text-sm text-gray-700 pb-4">{specialty}</p>
               </div>
             </div>
           ))}

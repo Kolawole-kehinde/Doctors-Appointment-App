@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import toast from "react-hot-toast";
-import { format } from "date-fns";
 import { supabase } from "../libs/supabase";
+import { format } from "date-fns";
 
 const MyAppointment = () => {
   const [appointments, setAppointments] = useState([]);
@@ -20,7 +19,7 @@ const MyAppointment = () => {
         .order("appointment_date", { ascending: false });
 
       if (error) {
-        toast.error("Error fetching appointments:", error);
+        console.error("Error fetching appointments:", error);
       } else {
         setAppointments(data);
       }
@@ -42,7 +41,7 @@ const MyAppointment = () => {
 
     if (error) {
       console.error("Failed to cancel appointment:", error);
-      toast.error("Error cancelling appointment.");
+      alert("Error cancelling appointment.");
     } else {
       setAppointments((prev) => prev.filter((appt) => appt.id !== appointmentId));
     }
@@ -69,9 +68,10 @@ const MyAppointment = () => {
       ) : (
         <div className="mt-4 space-y-6">
           {appointments.map((appt) => {
-            const appointmentDate = new Date(appt.appointment_date);
-            const formattedDate = format(appointmentDate, 'EEEE, MMMM dd, yyyy'); // Format weekday and date
-            const formattedTime = format(appointmentDate, 'hh:mm a'); // Format time
+            const appointmentDate = new Date(appt.appointment_date); // Format the appointment date
+            const formattedDate = format(appointmentDate, "dd MMM yyyy");
+            const dayOfWeek = format(appointmentDate, "EEEE"); // Get the day of the week
+
             return (
               <div
                 key={appt.id}
@@ -91,8 +91,7 @@ const MyAppointment = () => {
                   <p className="text-base font-medium mt-1">Address:</p>
                   <p className="text-sm">{appt.doctors?.address}</p>
                   <p className="text-sm mt-1">
-                    <span className="font-medium">Date & Time:</span>{" "}
-                    {formattedDate} | {formattedTime}
+                    <span className="font-medium">Date & Time:</span> {dayOfWeek}, {formattedDate} | {appt.appointment_time}
                   </p>
                 </div>
 

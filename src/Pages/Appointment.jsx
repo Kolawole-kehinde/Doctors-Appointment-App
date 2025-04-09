@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
 import { AppContext } from '../context/AppContext';
 import { format, addDays, setHours, setMinutes } from 'date-fns';
 import { supabase } from '../libs/supabase';
+import { useNavigate, useParams } from 'react-router';
 import RelatedDoctors from '../Componets/RelatedDoctors';
 
 const AppointmentPage = () => {
   const { docId } = useParams();
-  const { doctors, currentSymbol, user } = useContext(AppContext); // Ensure `user` has `id`
+  const navigate = useNavigate();
+  const { doctors, currentSymbol, user } = useContext(AppContext);
   const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
 
   const [docInfo, setDocInfo] = useState(null);
@@ -16,67 +17,68 @@ const AppointmentPage = () => {
   const [slotTime, setSlotTime] = useState('');
   const [bookingStatus, setBookingStatus] = useState(null);
 
+  // Get doctor info
   useEffect(() => {
-    const doctorInfo = doctors.find((doc) => doc.id.toString() === docId);
-    setDocInfo(doctorInfo);
+    const foundDoctor = doctors.find(doc => doc.id.toString() === docId);
+    setDocInfo(foundDoctor);
   }, [doctors, docId]);
 
+  // Generate weekly time slots
   useEffect(() => {
     if (!docInfo) return;
 
-    const generateSlots = () => {
-      const today = new Date();
-      const allSlots = [];
+    const today = new Date();
+    const allSlots = [];
 
-      for (let i = 0; i < 7; i++) {
-        const currentDate = addDays(today, i);
-        let startTime = setHours(setMinutes(currentDate, 0), 10); // 10 AM
-        const endTime = setHours(setMinutes(currentDate, 0), 21); // 9 PM
+    for (let i = 0; i < 7; i++) {
+      const date = addDays(today, i);
+      let start = setHours(setMinutes(date, 0), 10);
+      const end = setHours(setMinutes(date, 0), 21);
 
-        const timeSlots = [];
-        while (startTime < endTime) {
-          timeSlots.push({
-            datetime: new Date(startTime),
-            time: format(startTime, 'HH:mm'), // for DB insert
-            displayTime: format(startTime, 'hh:mm a'), // for UI
-          });
-          startTime = new Date(startTime.getTime() + 30 * 60000); // Add 30 minutes
-        }
-
-        allSlots.push({
-          day: daysOfWeek[currentDate.getDay()],
-          date: format(currentDate, 'yyyy-MM-dd'), // DB format
-          displayDate: format(currentDate, 'dd MMM'), // UI format
-          slots: timeSlots,
+      const timeSlots = [];
+      while (start < end) {
+        timeSlots.push({
+          datetime: new Date(start),
+          time: format(start, 'HH:mm'),
+          displayTime: format(start, 'hh:mm a'),
         });
+        start = new Date(start.getTime() + 30 * 60000);
       }
 
-      setDocSlots(allSlots);
-    };
+      allSlots.push({
+        day: daysOfWeek[date.getDay()],
+        date: format(date, 'yyyy-MM-dd'),
+        displayDate: format(date, 'dd MMM'),
+        slots: timeSlots,
+      });
+    }
 
-    generateSlots();
+    setDocSlots(allSlots);
   }, [docInfo]);
 
+  // Handle booking
   const handleBookAppointment = async () => {
-    if (!user || !user.id) {
+    if (!user?.id) {
       setBookingStatus({ success: false, message: "Please log in to book an appointment." });
       return;
     }
 
-    const selectedSlot = docSlots[slotIndex]?.slots.find(s => s.time === slotTime);
+    const selectedDateObj = docSlots[slotIndex];
+    const selectedSlot = selectedDateObj?.slots.find(s => s.time === slotTime);
     if (!selectedSlot) {
       setBookingStatus({ success: false, message: "Please select a valid time slot." });
       return;
     }
 
-    const { data, error } = await supabase.from("appointments").insert([
+    const { error } = await supabase.from("appointments").insert([
       {
         user_id: user.id,
         doctor_id: docId,
-        appointment_date: docSlots[slotIndex].date,
+        appointment_date: selectedDateObj.date,
+        appointment_day: selectedDateObj.day, // Store weekday
         appointment_time: selectedSlot.time,
         status: "pending",
-        notes: "", // Optional: add a notes field if needed
+        notes: "",
       },
     ]);
 
@@ -84,10 +86,17 @@ const AppointmentPage = () => {
       setBookingStatus({ success: false, message: error.message });
     } else {
       setBookingStatus({ success: true, message: "Appointment booked successfully!" });
+
+      // Optional delay for UI feedback, then redirect
+      setTimeout(() => {
+        navigate('/my-appointment');
+      }, 1500);
     }
   };
 
-  return docInfo && (
+  if (!docInfo) return null;
+
+  return (
     <div className="wrapper font-outfit px-4 lg:px-0">
       {/* Doctor Info */}
       <div className='flex flex-col md:flex-row gap-4'>
@@ -97,7 +106,7 @@ const AppointmentPage = () => {
         <div className='flex-1 border border-secondary-100 rounded-lg p-8 py-7 bg-white mx-2 md:mx-0 mt-[-40px] md:mt-0'>
           <p className='flex items-center gap-2 text-2xl md:text-[36px] font-medium text-primary-100'>
             {docInfo.name}
-            <img src="/images/Vector.png" alt={docInfo.specialty} className='size-[25px]'/>
+            <img src="/images/Vector.png" alt="verified" className='size-[25px]' />
           </p>
           <div className='flex items-center gap-2 text-secondary-300 mt-2'>
             <p className='text-sm md:text-xl'>{docInfo.degree} - {docInfo.specialty}</p>

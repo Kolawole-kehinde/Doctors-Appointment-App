@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 
 
 const AuthMenu = ({ menuStyle, toggleMenu }) => {
-  const { user, handleLogout, loading } = useAuth();
+  const { handleLogout, loading } = useAuth();
   const navigate = useNavigate();
 
   return (

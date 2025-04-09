@@ -4,6 +4,7 @@ import AuthMenu from "./AuthMenu";
 import { NavLink } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 
+
 const Menu = ({ toggleMenu, menuStyle}) => {
   const active = (isActive) => (isActive ? "text-primary" : "text-gray-500");
 
@@ -22,7 +23,9 @@ const Menu = ({ toggleMenu, menuStyle}) => {
             </NavLink>
           </li>
         ))
+        
       )}
+    
     </menu>
   );
 };

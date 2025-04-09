@@ -19,14 +19,14 @@ const TopDoctors = () => {
         </p>
 
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-5 sm:px-0">
-          {topDoctors.map(({ id, image, name, speciality }) => (
+          {topDoctors.map(({ id, image_url, name, speciality }) => (
             <div
             onClick={() => {navigate(`/appointment/${id}`); scrollTo(0,0)}}
               key={id}
               className="border border-blue-200  rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-500"
             >
               <img
-                src={image}
+                src={image_url}
                 alt={`${name}'s profile`}
                 className="bg-blue-50 w-full h-auto object-cover "
               />

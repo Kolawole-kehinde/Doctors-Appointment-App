@@ -2,12 +2,14 @@ import { useNavigate } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 import { IoIosArrowDown } from "react-icons/io";
 
+
 const AuthMenu = ({ menuStyle, toggleMenu }) => {
   const { user, handleLogout, loading } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <menu className={menuStyle}>
+    <section>
+           <menu className={menuStyle}>
       <div className="relative group">
         <div className="flex items-center cursor-pointer" onClick={toggleMenu}>
           <img src="/images/khennycool.jpeg" alt="profile-pic" className="w-8 h-8 rounded-full" />
@@ -29,7 +31,13 @@ const AuthMenu = ({ menuStyle, toggleMenu }) => {
           </div>
         </div>
       </div>
+    
+         
+      
     </menu>
+   
+    </section>
+   
   );
 };
 export default AuthMenu;

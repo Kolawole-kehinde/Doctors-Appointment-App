@@ -10,11 +10,13 @@ export const AppContext = createContext({
   user: null,
   setUser: (data) => {},
   handleLogout: () => {},
+  fetchDoctors: () => {},
   loading: false,
 });
 
 const AppContextProvider = ({children}) => {
   const [loading, setLoading] = useState(false);
+  const [doctors, setDoctors] = useState([]);
   const currentSymbol = '$';
 
   // Handle User
@@ -44,6 +46,23 @@ const AppContextProvider = ({children}) => {
       setLoading(false);
     }
   };
+
+  // Fetch doctors from Supabase
+    useEffect(() => {
+      setLoading(true);
+      const fetchDoctors = async () => {
+        const { data, error } = await supabase.from("doctors").select("*");
+        if (error) console.error("Error fetching doctors:", error);
+        else {
+          console.log(data); 
+          setDoctors(data);
+        }
+        setLoading(false);
+      };
+    
+      fetchDoctors();
+    }, []);
+  
 
   return (
     <AppContext.Provider value={{

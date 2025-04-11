@@ -1,6 +1,8 @@
 import React, { useContext, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AppContext } from "../context/AppContext";
+import SkeletonShowcaseCard from "../Componets/Skeleton";
+
 
 const Doctors = () => {
   const { doctors, loading } = useContext(AppContext);
@@ -26,7 +28,6 @@ const Doctors = () => {
   ];
 
   const handleSpecialtyClick = (item) => {
-    // Check if the current specialty is already selected
     if (speciality === item) {
       navigate("/doctors");
     } else {
@@ -40,7 +41,16 @@ const Doctors = () => {
     setShowFilter(false);
   };
 
-  if (loading) return <p className="text-center py-10">Loading doctors...</p>;
+  if (loading) {
+    return (
+      <div className="wrapper px-4 lg:px-0 font-outfit text-secondary-300 mt-5">
+        <h4 className="text-xl leading-[27px] mb-6">
+          Browse through the doctors' specialties.
+        </h4>
+        <SkeletonShowcaseCard count={8} />
+      </div>
+    );
+  }
 
   return (
     <div className="wrapper px-4 lg:px-0 font-outfit text-secondary-300 mt-5">
@@ -64,7 +74,6 @@ const Doctors = () => {
             showFilter ? "flex" : "hidden md:flex"
           }`}
         >
-          {/* "View All" button */}
           <p
             onClick={handleClearFilter}
             className="w-full md:w-[200px] p-2 border border-gray-300 rounded transition-all cursor-pointer hover:bg-gray-100"

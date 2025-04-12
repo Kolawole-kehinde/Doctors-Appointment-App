@@ -1,6 +1,6 @@
 
 
-const SkeletonShowcaseCard = ({ count = 6 }) => {
+const SkeletonLoader = ({ count = 6 }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
       {[...Array(count)].map((_, index) => (
@@ -18,4 +18,4 @@ const SkeletonShowcaseCard = ({ count = 6 }) => {
   );
 };
 
-export default SkeletonShowcaseCard;
+export default SkeletonLoader ;

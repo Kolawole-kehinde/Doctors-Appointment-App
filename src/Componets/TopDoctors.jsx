@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router";
-import SkeletonShowcaseCard from "./Skeleton";
+import SkeletonLoader from "./Skeleton";
+
 
 
 const TopDoctors = () => {
@@ -21,7 +22,7 @@ const TopDoctors = () => {
 
         {loading ? (
           <div className="w-full pt-5">
-            <SkeletonShowcaseCard count={8} />
+            <SkeletonLoader count={8} />
           </div>
         ) : (
           <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-5 sm:px-0">

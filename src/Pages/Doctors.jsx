@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AppContext } from "../context/AppContext";
-import SkeletonShowcaseCard from "../Componets/Skeleton";
+import SkeletonLoader from "../Componets/Skeleton";
 
 
 const Doctors = () => {
@@ -47,7 +47,7 @@ const Doctors = () => {
         <h4 className="text-xl leading-[27px] mb-6">
           Browse through the doctors' specialties.
         </h4>
-        <SkeletonShowcaseCard count={8} />
+        <SkeletonLoader  count={8} />
       </div>
     );
   }

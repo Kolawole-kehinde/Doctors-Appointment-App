@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { loginLists } from '../../constant/auth';
-import CustomInput from '../../Componets/CustomInput';
 import { useForm } from 'react-hook-form';
 import { loginSchema } from '../../schema/authSchema';
 import toast from 'react-hot-toast';
@@ -8,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router';
 import { signInApi } from '../../services/auth';
 import { AppContext } from '../../context/AppContext';
+import CustomInput from '../../Components/CustomInput';
 
 const LoginPage = () => {
   const { setUser } = useContext(AppContext);

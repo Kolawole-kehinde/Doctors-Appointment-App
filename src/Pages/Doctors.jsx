@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AppContext } from "../context/AppContext";
-import SkeletonLoader from "../Componets/Skeleton";
+import SkeletonLoader from "../Components/Skeleton";
 
 
 const Doctors = () => {

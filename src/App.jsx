@@ -4,14 +4,14 @@ import HomePage from "./Pages/Homepage";
 import AboutPage from "./Pages/About";
 import ContactPage from "./Pages/Contact";
 import MyProfilePage from "./Pages/MyProfile";
-import Footer from "./Componets/layout/Footer";
-import Navbar from "./Componets/layout/Navbar";
 import LoginPage from "./Pages/auth/Login";
 import RegisterPage from "./Pages/auth/Register";
 import Doctors from "./Pages/Doctors";
 import AppointmentPage from "./Pages/Appointment";
 import MyAppointment from './Pages/MyAppointment'
-import ProtectedRoute from "./Componets/ProtectedRoute/ProtectedRoute";
+import Navbar from "./Components/layout/Navbar";
+import Footer from "./Components/layout/Footer";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 const App = () => {
   return (
@@ -41,7 +41,7 @@ const App = () => {
 </Routes>
 
 
-      <Footer />
+      <Footer/>
     </>
   );
 };

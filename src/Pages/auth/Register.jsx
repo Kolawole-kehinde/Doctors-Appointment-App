@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { registerLists } from "../../constant/auth";
-import CustomInput from "../../Componets/CustomInput";
+import CustomInput from "../../Components/CustomInput";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../../schema/authSchema";
 import toast from "react-hot-toast";

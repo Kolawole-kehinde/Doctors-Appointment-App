@@ -3,7 +3,7 @@ import { AppContext } from '../context/AppContext';
 import { format, addDays, setHours, setMinutes } from 'date-fns';
 import { supabase } from '../libs/supabase';
 import { useNavigate, useParams } from 'react-router';
-import RelatedDoctors from '../Componets/RelatedDoctors';
+import RelatedDoctors from '../Components/RelatedDoctors';
 
 const AppointmentPage = () => {
   const { docId } = useParams();

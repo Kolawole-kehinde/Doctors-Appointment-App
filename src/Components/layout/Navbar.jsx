@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router";
-import Logo from "./Logo";
 import Menu from "./Menu";
 import { useAuth } from "../../hooks/useAuth";
 import CustomButton from "../CustomButton";
 import AuthMenu from "./AuthMenu";
+import Logo from "../../Components/layout/logo";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);

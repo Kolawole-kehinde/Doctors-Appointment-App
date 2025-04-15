@@ -12,9 +12,7 @@ const Menu = ({ toggleMenu, menuStyle}) => {
 
   return (
     <menu className={menuStyle}>
-      {user ? (
-        <AuthMenu menuStyle={menuStyle} toggleMenu={toggleMenu}/>
-      ) : (
+      {
         navRoutes?.map(({ id, name, path }) => (
           <li key={id}>
             <NavLink to={path} className={({ isActive }) => active(isActive)}
@@ -24,7 +22,7 @@ const Menu = ({ toggleMenu, menuStyle}) => {
           </li>
         ))
         
-      )}
+      }
     
     </menu>
   );

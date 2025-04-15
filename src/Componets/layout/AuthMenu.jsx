@@ -24,7 +24,7 @@ const AuthMenu = ({ menuStyle, toggleMenu }) => {
                 handleLogout();
                 toggleMenu();
               }}
-              className="hover:text-black cursor-pointer"
+              className="hover:text-black cursor-pointer text-start"
             >
               {loading ? "Logging Out..." : "Logout"}
             </button>

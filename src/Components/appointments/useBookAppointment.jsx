@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { format, addDays, setHours, setMinutes } from 'date-fns';
-import { supabase } from '../libs/supabase';
+import { supabase } from '../../libs/supabase';
 
 export const useAppointment = (docId, doctors, user) => {
   const [docInfo, setDocInfo] = useState(null);

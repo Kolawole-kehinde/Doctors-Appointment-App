@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { useNavigate, useParams } from 'react-router';
-import { useAppointmentSlots } from '../Components/appointments/useAppointmentSlots';
+import { useAppointment } from '../Components/appointments/useBookAppointment';
+import RelatedDoctors from '../Components/appointments/RelatedDoctors';
+
 
 
 const AppointmentPage = () => {
@@ -18,9 +20,9 @@ const AppointmentPage = () => {
     setSlotTime,
     handleBookAppointment,
     bookingStatus,
-  } = useAppointmentSlots(docId, doctors, user);
+  } = useAppointment(docId, doctors, user);
 
-  if (!docInfo) return null;
+  if (!docInfo) return <p className="text-center mt-10">Loading doctor information...</p>;
 
   return (
     <div className="wrapper font-outfit px-4 lg:px-0">

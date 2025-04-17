@@ -96,7 +96,9 @@ const AppointmentPage = () => {
       </div>
 
       {/* Related Doctors */}
-      <RelatedDoctors docId={docId} speciality={docInfo.specialty} />
+      <RelatedDoctors docId={docId} specialty={docInfo.specialty} />
+
+
     </div>
   );
 };

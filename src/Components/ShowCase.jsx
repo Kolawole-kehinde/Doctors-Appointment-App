@@ -5,9 +5,9 @@ const ShowCase = () => {
     <section className=" font-outfit px-4 lg:px-0">
       <div className="wrapper bg-primary flex flex-col-reverse  md:flex-row flex-wrap rounded-lg px-6 md:px-10 lg:px-20">
         {/* Left Section */}
-        <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 m-auto py-20 md:mb-[30px]">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl leading-tight lg:leading-[70px] font-semibold text-white">
-            Book Appointment <br /> 
+        <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 m-auto py-10 md:py-20 md:mb-[30px]">
+          <h1 className="text-2xl md:text-3xl lg:text-5xl leading-tight lg:leading-[70px] font-semibold text-white">
+            Book Appointment <br className="hidden" /> 
             With Trusted Doctors
           </h1>
           <div className="flex flex-col md:flex-row items-center gap-3 mb-6 text-white text-sm font-light">

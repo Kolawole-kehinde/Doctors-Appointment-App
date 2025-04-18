@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { useNavigate, useParams } from 'react-router';
-import { useAppointment } from '../Components/appointments/useBookAppointment';
+import { useAppointment } from '../Components/appointments/hooks/useBookAppointment';
 import RelatedDoctors from '../Components/appointments/RelatedDoctors';
 
 

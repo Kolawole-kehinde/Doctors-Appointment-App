@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import CustomInput from '../../Components/CustomInput';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../libs/supabase';
-import toast from 'react-hot-toast';
-
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -33,20 +33,23 @@ const ResetPasswordPage = () => {
   return (
     <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg space-y-4">
       <h2 className="text-xl font-semibold text-center">Reset Password</h2>
-      <input
+
+      <CustomInput
         type="password"
         placeholder="New Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 border rounded"
+        name="password"
       />
-      <input
+
+      <CustomInput
         type="password"
         placeholder="Confirm Password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        className="w-full p-2 border rounded"
+        name="confirmPassword"
       />
+
       <button
         onClick={handleReset}
         className="w-full bg-primary text-white py-2 rounded"

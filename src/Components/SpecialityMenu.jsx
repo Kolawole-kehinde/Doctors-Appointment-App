@@ -4,11 +4,11 @@ import { specialityData } from "../constant/specailityMenu";
 
 const SpecialityMenu = () => {
   return (
-    <section id="Speciality" className="wrapper flex flex-col items-center justify-center py-10 text-center ">
+    <section id="Speciality" className="wrapper flex flex-col items-center justify-center py-10 px-4 lg:px-0 text-center ">
       <h1 className="text-3xl md:text-[2.5rem] font-medium font-outfit text-primary-100 text-center pb-2">
         Find by Speciality
       </h1>
-      <p className="w-full max-w-[573px] text-base md:text-lg leading-[27px] text-secondary-300 font-outfit">
+      <p className="w-full max-w-[573px] text-sm md:text-lg leading-[27px] text-secondary-300 font-outfit">
         Simply browse through our extensive list of trusted doctors, schedule
         your appointment hassle-free.
       </p>

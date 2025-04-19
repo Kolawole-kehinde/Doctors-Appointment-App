@@ -74,6 +74,12 @@ const LoginPage = () => {
         {loading ? "Logging in..." : "Login"} 
       </button>
 
+      <p className="text-sm  text-right">
+        <Link to="/auth/forgot-password" className="text-primary text-base hover:underline">
+          Forgot Password?
+        </Link>
+      </p>
+
       <p className="text-sm text-gray-600 text-center">
         Don’t have an account?{" "}
         <Link to="/auth/register" className="text-primary text-base hover:underline">

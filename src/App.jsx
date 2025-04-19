@@ -13,6 +13,7 @@ import Navbar from "./Components/layout/Navbar";
 import Footer from "./Components/layout/Footer";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ForgotPasswordPage from "./Pages/auth/ForgotPasswordPage";
+import OTPVerificationPage from "./Pages/auth/OTPVerificationPage";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/auth/verify-otp" element={<OTPVerificationPage />} />
     </Route>
 
     {/* Public Routes */}

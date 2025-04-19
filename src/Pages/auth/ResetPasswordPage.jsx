@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../libs/supabase';
-import CustomInput from '../../Components/CustomInput';
+import toast from 'react-hot-toast';
+
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -10,17 +10,20 @@ const ResetPasswordPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Check if the URL contains the access token when the page loads
+  // Check for valid session from reset link
   useEffect(() => {
-    const hash = window.location.hash;
-    if (!hash.includes('access_token')) {
-      toast.error('Invalid or missing token.');
-      navigate('/auth/forgot-password');
-    }
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error('Unauthorized. Please use the reset link sent to your email.');
+        navigate('/login');
+      }
+    };
+
+    checkSession();
   }, [navigate]);
 
   const handleReset = async () => {
-    // Validate that passwords match
     if (password !== confirmPassword) {
       toast.error('Passwords do not match.');
       return;
@@ -28,15 +31,19 @@ const ResetPasswordPage = () => {
 
     setLoading(true);
     try {
-      // Make sure to update the password using the access token from the URL
-      const token = new URLSearchParams(window.location.hash).get('access_token');
-      if (!token) {
-        toast.error('Invalid or missing access token.');
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        toast.error('Session expired or invalid. Please open the reset link from your email again.');
         return;
       }
 
-      const { error } = await supabase.auth.updateUser({ password }, { access_token: token });
-      if (error) throw error;
+      const { error } = await supabase.auth.updateUser({ password });
+
+      if (error) {
+        console.error('Update error:', error); // Optional: for debugging
+        throw error;
+      }
 
       toast.success('Password updated! Please log in.');
       navigate('/auth/password-success');
@@ -51,20 +58,20 @@ const ResetPasswordPage = () => {
     <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg space-y-4">
       <h2 className="text-xl font-semibold text-center">Reset Password</h2>
 
-      <CustomInput
+      <input
         type="password"
         placeholder="New Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        name="password"
+        className="w-full p-2 border rounded"
       />
 
-      <CustomInput
+      <input
         type="password"
         placeholder="Confirm Password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        name="confirmPassword"
+        className="w-full p-2 border rounded"
       />
 
       <button

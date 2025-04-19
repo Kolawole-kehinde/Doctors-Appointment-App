@@ -28,9 +28,9 @@ const App = () => {
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="forgot-password" element={<ForgotPasswordPage />} />
-      <Route path="/auth/verify-otp" element={<OTPVerificationPage />} />
-      <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
-      <Route path="/auth/password-success" element={<PasswordSuccessPage />} />
+      <Route path="verify-otp" element={<OTPVerificationPage />} />
+      <Route path="reset-password" element={<ResetPasswordPage />} />
+      <Route path="password-success" element={<PasswordSuccessPage />} />
     </Route>
 
     {/* Public Routes */}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { supabase } from '../../libs/supabase';
 import toast from 'react-hot-toast';
-
+import CustomInput from '../../Components/CustomInput';
+import { supabase } from '../../libs/supabase';
+import { useNavigate } from 'react-router';
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const ResetPasswordPage = () => {
       const { error } = await supabase.auth.updateUser({ password });
 
       if (error) {
-        console.error('Update error:', error); // Optional: for debugging
+        console.error('Update error:', error); // optional: for debugging
         throw error;
       }
 
@@ -58,20 +58,18 @@ const ResetPasswordPage = () => {
     <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg space-y-4">
       <h2 className="text-xl font-semibold text-center">Reset Password</h2>
 
-      <input
+      <CustomInput
         type="password"
         placeholder="New Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 border rounded"
       />
 
-      <input
+      <CustomInput
         type="password"
         placeholder="Confirm Password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        className="w-full p-2 border rounded"
       />
 
       <button

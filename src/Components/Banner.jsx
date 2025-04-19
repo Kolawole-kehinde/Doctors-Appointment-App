@@ -18,7 +18,7 @@ const Banner = () => {
                </div>
             </div>
              <div className='hidden md:block md:w-1/2 lg:w-[380px] relative'>
-                <img src="/images/banner.svg" alt="bannerImg" className='absolute md:pl-20 w-[700px] bottom-0 right-0 max-w-md' />
+                <img src="/images/banner.svg" alt="bannerImg" className='absolute md:pl-20 w-[1000px] bottom-0 right-0 max-w-md' />
              </div>
         
         </div>

@@ -1,10 +1,9 @@
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
-import { z } from 'zod';
-import { supabase } from '../../libs/supabase';
-import toast from 'react-hot-toast';
-import { useForm } from 'react-hook-form';
+import { z } from "zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
+import { supabase } from "../../libs/supabase";
 
 
 const forgotSchema = z.object({
@@ -13,33 +12,29 @@ const forgotSchema = z.object({
 
 const ForgotPasswordPage = () => {
   const [loading, setLoading] = useState(false);
-
-  const { register,
-    handleSubmit, 
-    formState } = useForm({
-    resolver: zodResolver(forgotSchema),
-  });
-
-  const { errors } = formState || {};  // Safeguard to ensure `errors` is not undefined
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(forgotSchema) });
 
   const onSubmit = async ({ email }) => {
     setLoading(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/reset-password`,
+      redirectTo: `${import.meta.env.VITE_PUBLIC_SITE_URL}/auth/reset-password`,
     });
 
     if (error) {
-      toast.error("Failed to send reset link. Please try again.");
+      toast.error("Failed to send reset link.");
     } else {
-      toast.success("If this email exists, a reset link has been sent.");
+      toast.success("If the email exists, a reset link has been sent.");
     }
-
     setLoading(false);
   };
 
   return (
-    <form 
-      onSubmit={handleSubmit(onSubmit)} 
+    <form
+      onSubmit={handleSubmit(onSubmit)}
       className="max-w-md mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg space-y-4"
     >
       <h2 className="text-xl font-semibold">Forgot Password</h2>
@@ -48,10 +43,12 @@ const ForgotPasswordPage = () => {
       <input
         type="email"
         placeholder="Email"
-        className="w-full p-2 border rounded"
         {...register("email")}
+        className="w-full p-2 border rounded"
       />
-      {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+      {errors.email && (
+        <p className="text-red-500 text-sm">{errors.email.message}</p>
+      )}
 
       <button
         type="submit"

@@ -29,7 +29,7 @@ const AppointmentPage = () => {
       {/* Doctor Info */}
       <div className='flex flex-col md:flex-row gap-4'>
         <img src={docInfo.image_url} alt={docInfo.specialty} className='bg-primary w-full md:max-w-72 rounded-lg' />
-        <div className='flex-1 border border-secondary-100 rounded-lg p-8 py-7 bg-white'>
+        <div className='flex-1 border border-secondary-100 rounded-lg p-8 -mt-20 md:mt-0  md:mx-0 mx-2 bg-white'>
           <p className='text-2xl md:text-[36px] font-medium text-primary-100 flex items-center gap-2'>
             {docInfo.name}
             <img src="/images/Vector.png" alt="verified" className='size-[25px]' />
@@ -49,7 +49,7 @@ const AppointmentPage = () => {
       </div>
 
       {/* Booking Slots */}
-      <div className='sm:ml-72 sm:pl-4 mt-8 mb-20'>
+      <div className='sm:ml-72 sm:pl-4 mt-8 mb-10 md:mb-20'>
         <p className='text-lg md:text-[25px] text-secondary-400 font-medium'>Booking Slots</p>
 
         <div className='flex gap-3 overflow-x-auto mt-4'>

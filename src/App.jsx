@@ -12,6 +12,7 @@ import MyAppointment from './Pages/MyAppointment'
 import Navbar from "./Components/layout/Navbar";
 import Footer from "./Components/layout/Footer";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import ForgotPasswordPage from "./Pages/auth/ForgotPasswordPage";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
     <Route path="auth">
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
+      <Route path="forgot-password" element={<ForgotPasswordPage />} />
     </Route>
 
     {/* Public Routes */}

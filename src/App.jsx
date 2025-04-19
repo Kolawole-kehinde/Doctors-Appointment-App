@@ -15,6 +15,7 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ForgotPasswordPage from "./Pages/auth/ForgotPasswordPage";
 import OTPVerificationPage from "./Pages/auth/OTPVerificationPage";
 import ResetPasswordPage from "./Pages/auth/ResetPasswordPage";
+import PasswordSuccessPage from "./Pages/auth/PasswordSuccessPage";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
       <Route path="forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/auth/verify-otp" element={<OTPVerificationPage />} />
       <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/auth/password-success" element={<PasswordSuccessPage />} />
     </Route>
 
     {/* Public Routes */}

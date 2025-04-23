@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser, FaLock } from "react-icons/fa";
-
+import CustomInput from "../Components/CustomInput";
 
 const MyProfilePage = () => {
   const [activeTab, setActiveTab] = useState("profile");
-  const [showPassword, setShowPassword] = useState({
-    current: false,
-    new: false,
-    confirm: false,
-  });
-
-  const toggleShow = (field) => {
-    setShowPassword((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 md:px-20 font-outfit">
@@ -68,117 +58,53 @@ const MyProfilePage = () => {
           {/* Main Form */}
           <div className="col-span-3">
             {activeTab === "profile" ? (
-              // Profile Form (keep existing profile fields here)
               <form className="space-y-5 bg-white border rounded-lg p-6 shadow-sm">
-  <h2 className="text-xl font-semibold mb-2">Profile Details</h2>
+                <h2 className="text-xl font-semibold mb-2">Profile Details</h2>
 
-  <div>
-    <label className="block mb-1 font-medium">Full Name</label>
-    <input
-      type="text"
-      placeholder="Full Name"
-      className="w-full border border-gray-300 rounded px-3 py-2"
-    />
-  </div>
+                <CustomInput label="Full Name" placeholder="Full Name" />
+                <CustomInput label="Phone Number" placeholder="Phone Number" />
+                <CustomInput label="Email" type="email" placeholder="Email" />
+                <CustomInput
+                  label="Delivery Address"
+                  placeholder="Delivery Address"
+                />
 
-  <div>
-    <label className="block mb-1 font-medium">Phone Number</label>
-    <input
-      type="text"
-      placeholder="Phone Number"
-      className="w-full border border-gray-300 rounded px-3 py-2"
-    />
-  </div>
-
-  <div>
-    <label className="block mb-1 font-medium">Email</label>
-    <input
-      type="email"
-      placeholder="Email"
-      className="w-full border border-gray-300 rounded px-3 py-2"
-    />
-  </div>
-
-  <div>
-    <label className="block mb-1 font-medium">Delivery Address</label>
-    <input
-      type="text"
-      placeholder="Delivery Address"
-      className="w-full border border-gray-300 rounded px-3 py-2"
-    />
-  </div>
-
-  <div className="flex justify-end gap-4 pt-4">
-    <button
-      type="button"
-      className="px-6 py-2 rounded border border-green-600 text-green-600 hover:bg-green-50 transition"
-    >
-      Cancel
-    </button>
-    <button
-      type="submit"
-      className="px-6 py-2 rounded bg-green-600 text-white hover:bg-green-700 transition"
-    >
-      Update
-    </button>
-  </div>
-</form>
-
+                <div className="flex justify-end gap-4 pt-4">
+                  <button
+                    type="button"
+                    className="px-6 py-2 rounded border border-green-600 text-green-600 hover:bg-green-50 transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-6 py-2 rounded bg-green-600 text-white hover:bg-green-700 transition"
+                  >
+                    Update
+                  </button>
+                </div>
+              </form>
             ) : (
-              // Change Password Form
               <form className="space-y-5 bg-white border rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-semibold mb-2">Change Password</h2>
 
-                <div>
-                  <label className="block mb-1 font-medium">Current Password</label>
-                  <div className="relative">
-                    <input
-                      type={showPassword.current ? "text" : "password"}
-                      className="w-full border border-green-600 rounded px-3 py-2"
-                      placeholder="Current password"
-                    />
-                    <span
-                      onClick={() => toggleShow("current")}
-                      className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
-                    >
-                      {showPassword.current ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                    </span>
-                  </div>
-                </div>
+                <CustomInput
+                  label="Current Password"
+                  type="password"
+                  placeholder="Current password"
+                />
 
-                <div>
-                  <label className="block mb-1 font-medium">New Password</label>
-                  <div className="relative">
-                    <input
-                      type={showPassword.new ? "text" : "password"}
-                      className="w-full border border-gray-300 rounded px-3 py-2"
-                      placeholder="Enter new password"
-                    />
-                    <span
-                      onClick={() => toggleShow("new")}
-                      className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
-                    >
-                      {showPassword.new ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                    </span>
-                  </div>
-                </div>
+                <CustomInput
+                  label="New Password"
+                  type="password"
+                  placeholder="Enter new password"
+                />
 
-                <div>
-                  <label className="block mb-1 font-medium">Confirm Password</label>
-                  <div className="relative">
-                    <input
-                      type={showPassword.confirm ? "text" : "password"}
-                      className="w-full border border-gray-300 rounded px-3 py-2"
-                      placeholder="Confirm password"
-                    />
-                    <span
-                      onClick={() => toggleShow("confirm")}
-                      className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
-                    >
-                      {showPassword.confirm ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                    </span>
-                  </div>
-                </div>
+                <CustomInput
+                  label="Confirm Password"
+                  type="password"
+                  placeholder="Confirm password"
+                />
 
                 <div className="flex justify-end gap-4 pt-4">
                   <button

@@ -1,164 +1,107 @@
-import React, { useState } from "react";
+import React from "react";
+import { FaLock, FaUser } from "react-icons/fa";
 
 const MyProfilePage = () => {
-  const [userData, setUserData] = useState({
-    name: "Kolawole Kehinde",
-    image:
-      "https://res.cloudinary.com/daarrcw3q/image/upload/v1743400008/khennycool_kolspu.jpg",
-    email: "kolawolekehinde7033@gmail.com",
-    phone: "+234 703 736 1571",
-    address: "Circle, Church Road, London",
-    gender: "Male",
-    dob: "2000-01-19",
-  });
-
-  const [isEdit, setIsEdit] = useState(false);
-
-  // Handle profile picture change
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setUserData((prev) => ({ ...prev, image: imageUrl }));
-    }
-  };
-
   return (
-    <div className="wrapper max-w-lg flex flex-col gap-2 text-base font-outfit px-4 lg:px-0">
-      <div className="relative w-36">
-        <img src={userData.image} alt="profile-picture" className="w-36 rounded border-2 border-gray-300" />
-        {isEdit && (
-          <div className="mt-2">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="text-sm text-gray-500"
-            />
-          </div>
-        )}
-      </div>
-
-      {isEdit ? (
-        <input
-          type="text"
-          value={userData.name}
-          onChange={(e) =>
-            setUserData((prev) => ({ ...prev, name: e.target.value }))
-          }
-          className="text-[2rem] font-medium max-w-80 mt-4 border border-gray-300 p-1"
-        />
-      ) : (
-        <p className="font-medium text-[2rem] text-neutral-800 mt-4 capitalize">
-          {userData.name}
-        </p>
-      )}
-
-      <hr className="bg-secondary-100 h-[1px] w-full border-none" />
-
-      <div>
-        <p className="text-base text-secondary-500 underline mt-3 uppercase">
-          CONTACT INFORMATION
-        </p>
-        <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-secondary-200">
-          <p className="text-lg text-secondary-300">Email:</p>
-          <p className="text-primary text-base ml-2">{userData.email}</p>
-
-          <p className="text-lg text-secondary-300">Phone:</p>
-          {isEdit ? (
-            <input
-              type="text"
-              value={userData.phone}
-              onChange={(e) =>
-                setUserData((prev) => ({ ...prev, phone: e.target.value }))
-              }
-              className="border border-gray-300 p-1 ml-3 md:ml-0"
-            />
-          ) : (
-            <p className="text-lg text-primary">{userData.phone}</p>
-          )}
-
-          <p className="text-lg text-secondary-300">Address:</p>
-          {isEdit ? (
-            <>
-              <input
-                type="text"
-                value={userData.address}
-                onChange={(e) =>
-                  setUserData((prev) => ({
-                    ...prev,
-                    address: { ...prev, address: e.target.value },
-                  }))
-
-                }
-                className="border border-gray-300 p-1 ml-3  md:ml-0"
+    <div className="min-h-screen bg-gray-50 py-10 px-4 md:px-20 font-outfit">
+      <div className="bg-white max-w-5xl mx-auto rounded-lg shadow-md overflow-hidden">
+        {/* Avatar Background */}
+        <div className="bg-gray-200 h-40 relative flex justify-center items-end">
+          <label className="relative z-10">
+            <input type="file" accept="image/*" className="hidden" />
+            <div className="relative w-32 h-32 -mb-16">
+              <img
+                src="https://via.placeholder.com/150"
+                alt="Profile"
+                className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
               />
-              
-            </>
-          ) : (
-            <p className="text-lg text-secondary-600">
-              {userData.address}
-              <br />
-            
-            </p>
-          )}
+              <div className="absolute bottom-1 right-1 bg-white border-2 border-primary rounded-full p-1">
+                <svg
+                  className="w-4 h-4 text-black"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M4 3a1 1 0 000 2h1l1 1h6l1-1h1a1 1 0 100-2H4zM3 7h14v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+                </svg>
+              </div>
+            </div>
+          </label>
         </div>
-      </div>
 
-      <div>
-        <p className="text-base text-secondary-500 underline mt-3 uppercase">
-          BASIC INFORMATION
-        </p>
-        <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-secondary-200">
-          <p className="text-lg text-secondary-300">Gender:</p>
-          {isEdit ? (
-            <select
-              value={userData.gender}
-              onChange={(e) =>
-                setUserData((prev) => ({ ...prev, gender: e.target.value }))
-              }
-           className="border border-gray-300 p-1"
-            >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          ) : (
-            <p className="text-lg text-secondary-600">{userData.gender}</p>
-          )}
+        {/* Content Area */}
+        <div className="pt-20 px-6 pb-6 grid md:grid-cols-4 gap-8">
+          {/* Sidebar */}
+          <div className="border-b pr-6 col-span-1">
+          <ul className="rounded-lg overflow-hidden shadow-md border border-gray-200">
+  <li className="flex items-center gap-2 px-4 py-3 bg-white text-primary rounded-b-lg border-b border-primary cursor-pointer">
+    <FaUser fontSize={15} />
+    <span className="font-semibold">Profile Details</span>
+  </li>
+  <li className="flex items-center gap-2 px-4 py-3 bg-white text-black cursor-pointer hover:bg-gray-50 transition">
+    <FaLock fontSize={15}/>
+    <span>Change Password</span>
+  </li>
+</ul>
+          </div>
 
-          <p className="text-lg text-secondary-300">Birthday:</p>
-          {isEdit ? (
-            <input
-              type="date"
-              value={userData.dob}
-              max={new Date().toISOString().split("T")[0]} // Restrict to current date
-              onChange={(e) =>
-                setUserData((prev) => ({ ...prev, dob: e.target.value }))
-              }
-            className="border border-gray-300 p-1"
-            />
-          ) : (
-            <p className="text-lg text-secondary-600">{userData.dob}</p>
-          )}
+          {/* Form */}
+          <div className="col-span-3">
+            <form className="space-y-4">
+              <div>
+                <label className="block mb-1 font-medium">Full Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
+              </div>
+
+              <div>
+                <label className="block mb-1 font-medium">Phone Number</label>
+                <input
+                  type="text"
+                  placeholder="Enter your phone number"
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
+              </div>
+
+              <div>
+                <label className="block mb-1 font-medium">Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter your Email"
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
+              </div>
+
+              <div>
+                <label className="block mb-1 font-medium">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your address"
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
+              </div>
+
+              <div className="flex justify-end gap-4 pt-4">
+                <button
+                  type="button"
+                  className="px-6 py-2 rounded border border-primary text-primary hover:bg-green-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2 rounded bg-primary text-white hover:bg-green-700 transition"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-
-      <div className="mt-10">
-        {isEdit ? (
-          <button
-            onClick={() => setIsEdit(false)}
-            className="border border-primary px-8 py-2 rounded hover:bg-primary hover:text-white transition-all"
-          >
-            Save information
-          </button>
-        ) : (
-          <button
-            onClick={() => setIsEdit(true)}
-            className="border border-primary px-8 py-2 rounded hover:bg-primary hover:text-white transition-all"
-          >
-            Edit
-          </button>
-        )}
       </div>
     </div>
   );

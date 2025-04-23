@@ -31,7 +31,7 @@ const ForgotPasswordPage = () => {
     if (error) {
       toast.error("Failed to send reset link. Please try again.");
     } else {
-      toast.success("If this email exists, a reset link has been sent.");
+      toast.success("A reset link has been sent.");
     }
 
     setLoading(false);

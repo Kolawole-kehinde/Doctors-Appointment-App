@@ -13,7 +13,7 @@ export const signUpApi = async (payload) => {
   if (data?.user) {
     const { data: userData, error: userError } = await supabase
       .from("users")
-      .insert([{ name, email, user_id: data.user.id }])  // ✅ no password here
+      .insert([{ name, email, user_id: data.user.id }])
       .select()
       .single();
 

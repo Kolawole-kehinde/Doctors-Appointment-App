@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { doctors } from '../constant/doctors/';
 import LocalStorageService from "../utils/handleLocalStorage";
 import toast from "react-hot-toast";
 import { supabase } from "../libs/supabase";

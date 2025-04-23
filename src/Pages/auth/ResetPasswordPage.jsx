@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import CustomInput from '../../Components/CustomInput';
 import { supabase } from '../../libs/supabase';
-import { useNavigate } from 'react-router';
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -10,45 +10,37 @@ const ResetPasswordPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Check for valid session from reset link
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast.error('Unauthorized. Please use the reset link sent to your email.');
-        navigate('/login');
-      }
-    };
-
-    checkSession();
-  }, [navigate]);
-
   const handleReset = async () => {
+    if (!password || !confirmPassword) {
+      toast.error('Please fill in all fields.');
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters long.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       toast.error('Passwords do not match.');
       return;
     }
 
     setLoading(true);
+
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-
-      if (!session) {
-        toast.error('Session expired or invalid. Please open the reset link from your email again.');
-        return;
-      }
-
       const { error } = await supabase.auth.updateUser({ password });
 
       if (error) {
-        console.error('Update error:', error); // optional: for debugging
         throw error;
       }
 
-      toast.success('Password updated! Please log in.');
+      toast.success('Password updated successfully!');
       navigate('/auth/password-success');
     } catch (error) {
-      toast.error(error.message || 'Failed to reset password.');
+      toast.error(
+        error?.message || 'Password reset failed. Please ensure you used the reset link from your email.'
+      );
     } finally {
       setLoading(false);
     }
@@ -74,8 +66,10 @@ const ResetPasswordPage = () => {
 
       <button
         onClick={handleReset}
-        className="w-full bg-primary text-white py-2 rounded"
         disabled={loading}
+        className={`w-full bg-primary text-white py-2 rounded hover:scale-105 transition ${
+          loading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
         {loading ? 'Updating...' : 'Update Password'}
       </button>

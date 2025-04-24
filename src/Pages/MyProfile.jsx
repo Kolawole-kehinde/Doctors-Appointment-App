@@ -6,16 +6,26 @@ import { passwordFields, profileFields } from '../constant/profileFields';
 import CustomInput from '../Components/CustomInput';
 import ActionButton from '../Components/CustomButton/ActionButoon';
 
+
 const MyProfilePage = () => {
   const { user } = useContext(AppContext);
   const [activeTab, setActiveTab] = useState('profile');
-
-  const { formData, passwordData, loading, error, handleChange, handlePasswordChange, handleSubmitProfile, handleSubmitPassword } = useProfile(user?.id);
+  const {
+    formData,
+    passwordData,
+    loading,
+    error,
+    profilePicturePreview,
+    handleChange,
+    handlePasswordChange,
+    handleProfilePictureChange,
+    handleSubmitProfile,
+    handleSubmitPassword,
+  } = useProfile(user?.id);
 
   const renderForm = () => {
-    const fields = activeTab === 'profile' ? profileFields : passwordFields; // Switch fields based on active tab
-
-    const handleSubmit = activeTab === 'profile' ? handleSubmitProfile : handleSubmitPassword; // Choose correct submit handler
+    const fields = activeTab === 'profile' ? profileFields : passwordFields;
+    const handleSubmit = activeTab === 'profile' ? handleSubmitProfile : handleSubmitPassword;
 
     return (
       <form onSubmit={handleSubmit} className="space-y-5 bg-white border rounded-lg p-6 shadow-sm">
@@ -25,10 +35,10 @@ const MyProfilePage = () => {
             key={idx}
             label={field.label}
             name={field.name}
-            value={activeTab === 'profile' ? formData[field.name] : passwordData[field.name]}  // Use correct data based on tab
-            onChange={activeTab === 'profile' ? handleChange : handlePasswordChange}  // Use correct change handler
+            value={activeTab === 'profile' ? formData[field.name] : passwordData[field.name]}
+            onChange={activeTab === 'profile' ? handleChange : handlePasswordChange}
             placeholder={field.placeholder}
-            type={field.type || (activeTab === 'profile' ? 'text' : 'password')}  // Use 'password' type for password fields
+            type={field.type || (activeTab === 'profile' ? 'text' : 'password')}
           />
         ))}
         <div className="flex justify-end gap-4 pt-4">
@@ -43,10 +53,19 @@ const MyProfilePage = () => {
     <div className="min-h-screen bg-gray-100 py-10 px-4 md:px-20 font-outfit">
       <div className="bg-white max-w-5xl mx-auto rounded-lg shadow-md overflow-hidden">
         <div className="bg-gray-200 h-24 relative flex flex-col justify-center items-center">
-          <label className="relative z-10">
-            <input type="file" accept="image/*" className="hidden" />
+          <label className="relative z-10 cursor-pointer">
+            <input 
+              type="file" 
+              accept="image/*" 
+              className="hidden" 
+              onChange={handleProfilePictureChange}
+            />
             <div className="relative w-32 h-32 -mb-16">
-              <img src="https://via.placeholder.com/150" alt="Profile" className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md" />
+              <img 
+                src={profilePicturePreview || user?.profilePicture || 'https://via.placeholder.com/150'} 
+                alt="Profile" 
+                className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md" 
+              />
               <div className="absolute bottom-1 right-1 bg-white border-2 border-green-600 rounded-full p-1">
                 <FaUser className="w-4 h-4 text-black" />
               </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../libs/supabase";
 import toast from "react-hot-toast";
-import { imageUploadToServer } from "../services/imageUploadToServer"; // Import the image upload function
+import { useProfilePictureUpload } from "../hooks/useProfilePictureUpload";
 
 export const useProfile = (userId) => {
   const [formData, setFormData] = useState({
@@ -9,9 +9,8 @@ export const useProfile = (userId) => {
     email: '',
     phone: '',
     address: '',
-    profilePicture: '', // Store the profile picture URL
+    profilePicture: '',
   });
-  const [profilePicturePreview, setProfilePicturePreview] = useState(''); // State for image preview
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -20,7 +19,15 @@ export const useProfile = (userId) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch user data from the database
+  const {
+    preview: profilePicturePreview,
+    loading: imageUploading,
+    error: imageUploadError,
+    handleProfilePictureChange,
+  } = useProfilePictureUpload(userId, (url) => {
+    setFormData((prev) => ({ ...prev, profilePicture: url }));
+  });
+
   useEffect(() => {
     if (!userId) return;
 
@@ -31,9 +38,6 @@ export const useProfile = (userId) => {
         setError(error.message);
       } else {
         setFormData(data || {});
-        if (data?.profilePicture) {
-          setProfilePicturePreview(data.profilePicture);
-        }
       }
       setLoading(false);
     };
@@ -41,46 +45,15 @@ export const useProfile = (userId) => {
     fetchUserData();
   }, [userId]);
 
-  // Handle form changes for profile and password
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handlePasswordChange = (e) => {
-    setPasswordData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setPasswordData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle profile picture upload and preview
-  const handleProfilePictureChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Create a preview of the image
-      const previewUrl = URL.createObjectURL(file);
-      setProfilePicturePreview(previewUrl); // Set the preview state
-
-      setLoading(true);
-      try {
-        const url = await imageUploadToServer(file); // Use the image upload function
-        // Update the profile picture URL in the database
-        const { error } = await supabase
-          .from('users')
-          .update({ profilePicture: url })
-          .eq('id', userId);
-
-        if (error) throw error;
-
-        // Update the form data with the new image URL
-        setFormData((prev) => ({ ...prev, profilePicture: url }));
-        toast.success("Profile picture updated successfully!");
-      } catch (uploadError) {
-        setError(uploadError.message);
-        toast.error("Failed to upload profile picture.");
-      }
-      setLoading(false);
-    }
-  };
-
-  // Handle profile form submission
   const handleSubmitProfile = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -95,10 +68,30 @@ export const useProfile = (userId) => {
     setLoading(false);
   };
 
-  // Handle password form submission
   const handleSubmitPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      toast.error('New passwords do not match.');
+      setLoading(false);
+      return;
+    }
+
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+    const email = sessionData?.session?.user?.email;
+
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password: passwordData.currentPassword,
+    });
+
+    if (signInError) {
+      toast.error('Current password is incorrect.');
+      setLoading(false);
+      return;
+    }
+
     const { error } = await supabase.auth.updateUser({ password: passwordData.newPassword });
     if (error) {
       setError(error.message);
@@ -113,9 +106,9 @@ export const useProfile = (userId) => {
   return {
     formData,
     passwordData,
-    loading,
-    error,
-    profilePicturePreview, // Return the image preview state
+    loading: loading || imageUploading,
+    error: error || imageUploadError,
+    profilePicturePreview,
     handleChange,
     handlePasswordChange,
     handleProfilePictureChange,

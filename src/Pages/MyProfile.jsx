@@ -1,4 +1,3 @@
-// src/pages/ProfilePage.js
 import React, { useState, useContext } from 'react';
 import { FaUser, FaLock } from 'react-icons/fa';
 import { AppContext } from '../context/AppContext';
@@ -11,10 +10,12 @@ const MyProfilePage = () => {
   const { user } = useContext(AppContext);
   const [activeTab, setActiveTab] = useState('profile');
 
-  const { formData, loading, error, handleChange, handleSubmit } = useProfile(user?.id);
+  const { formData, passwordData, loading, error, handleChange, handlePasswordChange, handleSubmitProfile, handleSubmitPassword } = useProfile(user?.id);
 
   const renderForm = () => {
     const fields = activeTab === 'profile' ? profileFields : passwordFields; // Switch fields based on active tab
+
+    const handleSubmit = activeTab === 'profile' ? handleSubmitProfile : handleSubmitPassword; // Choose correct submit handler
 
     return (
       <form onSubmit={handleSubmit} className="space-y-5 bg-white border rounded-lg p-6 shadow-sm">
@@ -24,10 +25,10 @@ const MyProfilePage = () => {
             key={idx}
             label={field.label}
             name={field.name}
-            value={formData[field.name] || ''}
-            onChange={handleChange}
+            value={activeTab === 'profile' ? formData[field.name] : passwordData[field.name]}  // Use correct data based on tab
+            onChange={activeTab === 'profile' ? handleChange : handlePasswordChange}  // Use correct change handler
             placeholder={field.placeholder}
-            type={field.type || 'text'}  // Use text for non-password fields and password for password fields
+            type={field.type || (activeTab === 'profile' ? 'text' : 'password')}  // Use 'password' type for password fields
           />
         ))}
         <div className="flex justify-end gap-4 pt-4">

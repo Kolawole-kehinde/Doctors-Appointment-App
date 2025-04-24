@@ -13,8 +13,6 @@ const MyProfilePage = () => {
   const {
     formData,
     passwordData,
-    loading,
-    error,
     profilePicturePreview,
     handleChange,
     handlePasswordChange,

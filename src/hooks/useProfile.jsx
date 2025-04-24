@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { supabase } from '../libs/supabase';
 import toast from 'react-hot-toast';
+import { AppContext } from '../context/AppContext';
+
 
 export const useProfile = (userId) => {
   const [formData, setFormData] = useState({
@@ -11,6 +13,7 @@ export const useProfile = (userId) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { setUser } = useContext(AppContext);
 
   // Fetch user profile
   useEffect(() => {
@@ -43,11 +46,23 @@ export const useProfile = (userId) => {
 
     if (error) {
       setError(error.message);
-      toast.error('Error updating profile. Please try again.'); // Show error toast
+      toast.error('Error updating profile. Please try again.');
     } else {
       setError(null);
-      toast.success('Profile updated successfully!'); // Show success toast
+      toast.success('Profile updated successfully!');
+
+      // Refetch updated user and set in context
+      const { data: updatedUser, error: fetchError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', userId)
+        .single();
+
+      if (!fetchError && updatedUser) {
+        setUser(updatedUser);
+      }
     }
+
     setLoading(false);
   };
 

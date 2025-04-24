@@ -1,3 +1,5 @@
+// src/utils/fieldDefinitions.js
+
 export const profileFields = [
     { label: "Name", name: "name", placeholder: "Enter your name" },
     { label: "Email", name: "email", placeholder: "Enter your email" },
@@ -5,20 +7,24 @@ export const profileFields = [
     { label: "Address", name: "address", placeholder: "Enter your address" },
   ];
   
-export const passwordFields = [
-  {
-    label: "Current Password",
-    type: "password",
-    placeholder: "Current password",
-  },
-  {
-    label: "New Password",
-    type: "password",
-    placeholder: "Enter new password",
-  },
-  {
-    label: "Confirm Password",
-    type: "password",
-    placeholder: "Confirm password",
-  },
-];
+  export const passwordFields = [
+    {
+      label: "Current Password",
+      name: "currentPassword",
+      type: "password",
+      placeholder: "Enter your current password",
+    },
+    {
+      label: "New Password",
+      name: "newPassword",
+      type: "password",
+      placeholder: "Enter new password",
+    },
+    {
+      label: "Confirm Password",
+      name: "confirmPassword",
+      type: "password",
+      placeholder: "Confirm new password",
+    },
+  ];
+  

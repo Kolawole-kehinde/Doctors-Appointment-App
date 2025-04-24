@@ -65,29 +65,23 @@ const AppContextProvider = ({ children }) => {
   // Update User Profile
   const updateUserProfile = async (address, phone) => {
     const { data: authData, error: authError } = await supabase.auth.getUser();
-
+  
     if (authError || !authData?.user) {
       toast.error("You must be logged in to update your profile.");
       return;
     }
-
+  
     const userId = authData.user.id;
-
+  
     const { error: updateError } = await supabase
       .from("users")
       .update({ address, phone })
       .eq("user_id", userId); // match by user_id
-
+  
     if (updateError) {
       toast.error("Error updating profile. Please try again.");
     } else {
-      toast.success("Profile updated successfully!");
-      // Update user state after successful update
-      setUser((prevUser) => ({
-        ...prevUser,
-        phone,
-        address,
-      }));
+      toast.success("Profile updated successfully!"); // This will show the success toast
     }
   };
 

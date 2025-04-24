@@ -23,15 +23,17 @@ const CustomInput = ({
     <div className="">
       {label && <label htmlFor={name}>{label}</label>} 
       <div className='relative'>
-        <input
-          name={name}
-          type={showPassword && type === "password" ? "text" : type}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          {...register(name)}
-          className={`w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-100 ${className}`}
-        />
+      <input
+  name={name}
+  id={name}
+  type={showPassword && type === "password" ? "text" : type}
+  placeholder={placeholder}
+  {...(register ? register(name) : {})}
+  value={value}
+  onChange={onChange}
+  className={`w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-100 ${className}`}
+/>
+
          {type === "password" && (
           <div className=" absolute top-1/2 right-2 -translate-y-1/2" onClick={togglePassword}> 
             {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}

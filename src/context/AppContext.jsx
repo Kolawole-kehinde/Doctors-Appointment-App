@@ -4,19 +4,19 @@ import toast from "react-hot-toast";
 import { supabase } from "../libs/supabase";
 import { useNavigate } from "react-router";
 
-
 export const AppContext = createContext({
   user: null,
   setUser: (data) => {},
   handleLogout: () => {},
   fetchDoctors: () => {},
   loading: false,
+  updateUserProfile: () => {},
 });
 
-const AppContextProvider = ({children}) => {
+const AppContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [doctors, setDoctors] = useState([]);
-  const currentSymbol = '$';
+  const currentSymbol = "$";
 
   // Handle User
   const { getItem, setItem, clear } = LocalStorageService;
@@ -40,38 +40,69 @@ const AppContextProvider = ({children}) => {
       clear();
       navigate("/auth/login");
     } catch (error) {
-      toast.error(error.message );
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
   };
 
   // Fetch doctors from Supabase
-    useEffect(() => {
-      setLoading(true);
-      const fetchDoctors = async () => {
-        const { data, error } = await supabase.from("doctors").select("*");
-        if (error) console.error("Error fetching doctors:", error);
-        else {
-          console.log(data); 
-          setDoctors(data);
-        }
-        setLoading(false);
-      };
-    
-      fetchDoctors();
-    }, []);
-  
+  useEffect(() => {
+    setLoading(true);
+    const fetchDoctors = async () => {
+      const { data, error } = await supabase.from("doctors").select("*");
+      if (error) console.error("Error fetching doctors:", error);
+      else {
+        console.log(data);
+        setDoctors(data);
+      }
+      setLoading(false);
+    };
+
+    fetchDoctors();
+  }, []);
+
+  // Update User Profile
+  const updateUserProfile = async (address, phone) => {
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+
+    if (authError || !authData?.user) {
+      toast.error("You must be logged in to update your profile.");
+      return;
+    }
+
+    const userId = authData.user.id;
+
+    const { error: updateError } = await supabase
+      .from("users")
+      .update({ address, phone })
+      .eq("user_id", userId); // match by user_id
+
+    if (updateError) {
+      toast.error("Error updating profile. Please try again.");
+    } else {
+      toast.success("Profile updated successfully!");
+      // Update user state after successful update
+      setUser((prevUser) => ({
+        ...prevUser,
+        phone,
+        address,
+      }));
+    }
+  };
 
   return (
-    <AppContext.Provider value={{
-      doctors,
-      currentSymbol,
-      user,
-      setUser,
-      handleLogout,
-      loading,
-    }}>
+    <AppContext.Provider
+      value={{
+        doctors,
+        currentSymbol,
+        user,
+        setUser,
+        handleLogout,
+        loading,
+        updateUserProfile,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

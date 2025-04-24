@@ -1,6 +1,7 @@
 import { supabase } from "../../libs/supabase";
 
-export const signUpApi = async (payload) => { 
+// Sign Up API
+export const signUpApi = async (payload) => {
   const { name, email, password } = payload;
 
   const { data, error } = await supabase.auth.signUp({
@@ -10,19 +11,25 @@ export const signUpApi = async (payload) => {
 
   if (error) throw new Error(error.message);
 
-  if (data?.user) {
-    const { data: userData, error: userError } = await supabase
-      .from("users")
-      .insert([{ name, email, user_id: data.user.id }])
-      .select()
-      .single();
+  const userId = data?.user?.id;
 
-    if (userError) throw new Error(userError.message);
-    return userData;
+  if (!userId) {
+    throw new Error("User ID is undefined. Something went wrong with sign up.");
   }
+
+  const { data: userData, error: userError } = await supabase
+    .from("users")
+    .insert([{ name, email, user_id: userId }])
+    .select()
+    .single();
+
+  if (userError) throw new Error(userError.message);
+
+  return userData;
 };
 
 
+// Sign In API
 export const signInApi = async (payload) => {
   const { email, password } = payload;
 
@@ -33,11 +40,14 @@ export const signInApi = async (payload) => {
 
   if (error) throw new Error(error.message);
 
-  if (data?.user) {
+  const user = data?.user;
+
+  // Fetch user info from 'users' table by user_id
+  if (user) {
     const { data: userData, error: userError } = await supabase
       .from("users")
       .select()
-      .eq("user_id", data.user.id)  // 👈 safer to match by user_id than email
+      .eq("user_id", user.id)
       .single();
 
     if (userError) throw new Error(userError.message);

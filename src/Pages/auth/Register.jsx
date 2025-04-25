@@ -1,18 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { registerLists } from "../../constant/auth";
 import CustomInput from "../../Components/CustomInput";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../../schema/authSchema";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "react-router";
 import { signUpApi } from "../../services/auth";
 import { AppContext } from "../../context/AppContext";
+import { Link, useNavigate } from "react-router";
+import { getPasswordStrength } from "../../utils/passwordStrength";
 
 const RegisterPage = () => {
   const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [passwordValue, setPasswordValue] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState("");
 
   const {
     register,
@@ -29,26 +32,26 @@ const RegisterPage = () => {
     },
   });
 
+  useEffect(() => {
+    setPasswordStrength(getPasswordStrength(passwordValue));
+  }, [passwordValue]);
+
   const onSubmit = async (data) => {
     const payload = {
       name: data.name,
       email: data.email,
       password: data.password,
     };
-    setLoading(true);
 
+    setLoading(true);
     try {
       const res = await signUpApi(payload);
-      console.log("User registered:", res);
-
       toast.success("User registered successfully!");
       setUser(res);
       reset();
-      navigate("/profile"); 
-
+      navigate("/profile");
     } catch (error) {
-      console.error("Registration error:", error.message);
-      toast.error(error.message); 
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -63,15 +66,34 @@ const RegisterPage = () => {
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {registerLists?.map(({ name, type, label }) => (
-            <CustomInput
-              key={name}
-              type={type}
-              name={name}
-              label={label}
-              register={register}
-              errors={errors[name]?.message}
-            />
+          {registerLists.map(({ name, type, label }) => (
+            <div key={name}>
+              <CustomInput
+                type={type}
+                name={name}
+                label={label}
+                register={register}
+                errors={errors[name]?.message}
+                onChange={
+                  name === "password"
+                    ? (e) => setPasswordValue(e.target.value)
+                    : undefined
+                }
+              />
+              {name === "password" && passwordValue && (
+                <p
+                  className={`text-sm mt-1 ${
+                    passwordStrength === "Strong"
+                      ? "text-green-600"
+                      : passwordStrength === "Medium"
+                      ? "text-yellow-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  Strength: {passwordStrength}
+                </p>
+              )}
+            </div>
           ))}
 
           <button

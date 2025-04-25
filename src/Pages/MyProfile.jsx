@@ -13,8 +13,6 @@ const MyProfilePage = () => {
   const {
     formData,
     passwordData,
-    loading,
-    error,
     profilePicturePreview,
     handleChange,
     handlePasswordChange,
@@ -66,7 +64,7 @@ const MyProfilePage = () => {
                 alt="Profile" 
                 className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md" 
               />
-              <div className="absolute bottom-1 right-1 bg-white border-2 border-green-600 rounded-full p-1">
+              <div className="absolute bottom-1 right-1 bg-white border-2 border-blue-600 rounded-full p-1">
                 <FaUser className="w-4 h-4 text-black" />
               </div>
             </div>

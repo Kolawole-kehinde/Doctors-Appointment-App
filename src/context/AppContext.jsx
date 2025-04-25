@@ -9,8 +9,8 @@ export const AppContext = createContext({
   setUser: (data) => {},
   handleLogout: () => {},
   fetchDoctors: () => {},
+  updateUserProfile: (data) => {}, // Added updateUserProfile function
   loading: false,
-  updateUserProfile: () => {},
 });
 
 const AppContextProvider = ({ children }) => {
@@ -62,26 +62,25 @@ const AppContextProvider = ({ children }) => {
     fetchDoctors();
   }, []);
 
-  // Update User Profile
-  const updateUserProfile = async (address, phone) => {
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-  
-    if (authError || !authData?.user) {
-      toast.error("You must be logged in to update your profile.");
-      return;
-    }
-  
-    const userId = authData.user.id;
-  
-    const { error: updateError } = await supabase
-      .from("users")
-      .update({ address, phone })
-      .eq("user_id", userId); // match by user_id
-  
-    if (updateError) {
-      toast.error("Error updating profile. Please try again.");
-    } else {
-      toast.success("Profile updated successfully!"); // This will show the success toast
+  // Update User Profile Function
+  const updateUserProfile = async (updatedUserData) => {
+    setLoading(true);
+    try {
+      // Assuming you're updating the user profile in Supabase
+      const { data, error } = await supabase
+        .from("users")
+        .upsert([updatedUserData]); // Or use the proper API to update the user's profile
+      if (error) throw error;
+
+      // Update the user in context and local storage
+      setUser({ ...user, ...updatedUserData });
+      setItem("auth", { ...user, ...updatedUserData });
+
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      toast.error("Failed to update profile: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,8 +92,8 @@ const AppContextProvider = ({ children }) => {
         user,
         setUser,
         handleLogout,
+        updateUserProfile, // Provide the update function in context
         loading,
-        updateUserProfile,
       }}
     >
       {children}

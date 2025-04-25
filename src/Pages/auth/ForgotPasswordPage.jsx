@@ -24,16 +24,18 @@ const ForgotPasswordPage = () => {
 
   const onSubmit = async ({ email }) => {
     setLoading(true);
+    
+    // Update the redirect URL to your production domain
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/reset-password`,
+      redirectTo: `https://doctors-appointment-app-alpha.vercel.app/auth/reset-password`,
     });
-
+  
     if (error) {
       toast.error("Failed to send reset link. Please try again.");
     } else {
       toast.success("A reset link has been sent.");
     }
-
+  
     setLoading(false);
   };
 

@@ -24,10 +24,15 @@ const ForgotPasswordPage = () => {
 
   const onSubmit = async ({ email }) => {
     setLoading(true);
-    
-    // Update the redirect URL to your production domain
+  
+    // Dynamically set the redirect URL based on the environment
+    const redirectUrl =
+      process.env.NODE_ENV === 'production'
+        ? 'https://doctors-appointment-app-alpha.vercel.app/auth/reset-password'
+        : 'http://localhost:3000/auth/reset-password'; // for local development
+  
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `https://doctors-appointment-app-alpha.vercel.app/auth/reset-password`,
+      redirectTo: redirectUrl,
     });
   
     if (error) {

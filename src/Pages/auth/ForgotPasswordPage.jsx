@@ -1,11 +1,9 @@
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { z } from 'zod';
 import { supabase } from '../../libs/supabase';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
-
 
 const forgotSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -14,33 +12,27 @@ const forgotSchema = z.object({
 const ForgotPasswordPage = () => {
   const [loading, setLoading] = useState(false);
 
-  const { register,
-    handleSubmit, 
-    formState } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     resolver: zodResolver(forgotSchema),
   });
 
-  const { errors } = formState || {};  // Safeguard to ensure `errors` is not undefined
+  const { errors } = formState;
 
   const onSubmit = async ({ email }) => {
     setLoading(true);
-  
-    // Dynamically set the redirect URL based on the environment
-    const redirectUrl =
-      process.env.NODE_ENV === 'production'
-        ? 'https://doctors-appointment-app-alpha.vercel.app/auth/reset-password'
-        : 'http://localhost:3000/auth/reset-password'; // for local development
-  
+    
+    // Update the redirect URL to your production domain
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: redirectUrl,
+      redirectTo: `https://doctors-appointment-app-alpha.vercel.app/auth/reset-password`,
     });
-  
+
     if (error) {
+      console.error(error); // Log the error for better debugging
       toast.error("Failed to send reset link. Please try again.");
     } else {
       toast.success("A reset link has been sent.");
     }
-  
+
     setLoading(false);
   };
 

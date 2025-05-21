@@ -27,7 +27,7 @@ const MyProfilePage = () => {
 
     return (
       <form onSubmit={handleSubmit} className="space-y-5 bg-white border rounded-lg p-6 shadow-sm">
-        <h2 className="text-xl font-semibold mb-2">{activeTab === 'profile' ? 'Profile Details' : 'Change Password'}</h2>
+        <h2 className="text-base md:text-xl font-semibold mb-2">{activeTab === 'profile' ? 'Profile Details' : 'Change Password'}</h2>
         {fields.map((field, idx) => (
           <CustomInput
             key={idx}

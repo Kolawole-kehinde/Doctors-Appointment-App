@@ -20,7 +20,7 @@ const AuthMenu = ({ menuStyle, toggleMenu }) => {
       className="w-8 h-8 rounded-full object-cover"
     />
   ) : (
-    <FaUser className="w-8 h-8 text-gray-500" />
+    <FaUser className="size-6 md:size-8 py-2 text-gray-500" />
   )}
   <IoIosArrowDown fontSize={20} />
 </div>

@@ -13,7 +13,7 @@ const SpecialityMenu = () => {
         your appointment hassle-free.
       </p>
 
-      <div className="flex items-center justify-center gap-4 pt-10 w-full overflow-x-auto">
+      <div className="flex items-center justify-center gap-4 pt-10 w-full overflow-x-auto scrollbar-hide">
         {specialityData?.map(({ id, image, speciality }) => (
           <Link
             key={id} 
